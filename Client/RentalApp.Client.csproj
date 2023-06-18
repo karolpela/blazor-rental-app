@@ -7,13 +7,44 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="7.0.5" />
-        <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="7.0.5" PrivateAssets="all" />
-        <PackageReference Include="Microsoft.Fast.Components.FluentUI" Version="2.3.6" />
+        <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="7.0.7" />
+        <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="7.0.7" PrivateAssets="all" />
+        <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="7.0.7" />
+        <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="7.0.7" />
+        <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="7.0.7">
+          <PrivateAssets>all</PrivateAssets>
+          <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+        </PackageReference>
+        <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="7.0.7" />
+        <PackageReference Include="Radzen.Blazor" Version="4.13.2" />
     </ItemGroup>
 
     <ItemGroup>
         <ProjectReference Include="..\Shared\RentalApp.Shared.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <_ContentIncludedByDefault Remove="wwwroot\fonts\MaterialIcons-Regular.woff" />
+      <_ContentIncludedByDefault Remove="wwwroot\fonts\roboto-regular.woff" />
+      <_ContentIncludedByDefault Remove="wwwroot\fonts\roboto-v15-latin-300.woff" />
+      <_ContentIncludedByDefault Remove="wwwroot\fonts\roboto-v15-latin-700.woff" />
+      <_ContentIncludedByDefault Remove="wwwroot\fonts\roboto-v15-latin-regular.woff" />
+      <_ContentIncludedByDefault Remove="wwwroot\fonts\roboto-v30-latin-300.woff" />
+      <_ContentIncludedByDefault Remove="wwwroot\fonts\roboto-v30-latin-500.woff" />
+      <_ContentIncludedByDefault Remove="wwwroot\fonts\roboto-v30-latin-700.woff" />
+      <_ContentIncludedByDefault Remove="wwwroot\fonts\roboto-v30-latin-regular.woff" />
+      <_ContentIncludedByDefault Remove="wwwroot\fonts\SourceSansPro-Black.woff" />
+      <_ContentIncludedByDefault Remove="wwwroot\fonts\SourceSansPro-BlackIt.woff" />
+      <_ContentIncludedByDefault Remove="wwwroot\fonts\SourceSansPro-Bold.woff" />
+      <_ContentIncludedByDefault Remove="wwwroot\fonts\SourceSansPro-BoldIt.woff" />
+      <_ContentIncludedByDefault Remove="wwwroot\fonts\SourceSansPro-ExtraLight.woff" />
+      <_ContentIncludedByDefault Remove="wwwroot\fonts\SourceSansPro-ExtraLightIt.woff" />
+      <_ContentIncludedByDefault Remove="wwwroot\fonts\SourceSansPro-It.woff" />
+      <_ContentIncludedByDefault Remove="wwwroot\fonts\SourceSansPro-Light.woff" />
+      <_ContentIncludedByDefault Remove="wwwroot\fonts\SourceSansPro-LightIt.woff" />
+      <_ContentIncludedByDefault Remove="wwwroot\fonts\SourceSansPro-Regular.woff" />
+      <_ContentIncludedByDefault Remove="wwwroot\fonts\SourceSansPro-Semibold.woff" />
+      <_ContentIncludedByDefault Remove="wwwroot\fonts\SourceSansPro-SemiboldIt.woff" />
     </ItemGroup>
 
 </Project>

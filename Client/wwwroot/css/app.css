@@ -1,85 +1,33 @@
-﻿body {
+body {
     --body-font: Segoe UI, sans-serif;
     font-family: var(--body-font);
     font-size: var(--type-ramp-base-font-size);
     line-height: var(--type-ramp-base-line-height);
     margin: 0;
+    width: 100%;
+    color: #3e3e3e;
 }
 
-.container {
-    display: grid;
-    grid-template-columns: 1fr;
-    grid-template-rows: 60px 1fr;
-    gap: 0px 0px;
-    grid-auto-flow: row;
-    grid-template-areas:
-        "siteheader"
-        "main";
-}
-
-.siteheader {
-    grid-area: siteheader;
-    background-color: #f7f7f7;
-    border-bottom: 1px solid #d6d5d5;
-    justify-content: flex-start;
-    height: 3.5rem;
+body, html {
+    height: 100%;
+    margin: 0;
     display: flex;
     align-items: center;
-    white-space: nowrap;
-    padding-left: 1.5rem;
+    justify-content: center;
 }
 
-    .siteheader a {
-        padding-inline-end: 10px;
-    }
-
-.main {
-    display: grid;
-    grid-template-columns: 1fr 3fr;
-    grid-template-rows: 1fr;
-    gap: 0px 0px;
-    grid-auto-flow: row;
-    grid-template-areas:
-        "navigation content";
-    grid-area: main;
+h1 {
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
-.navigation {
-    grid-area: navigation;
-    background-color: var(--fill-color);
-    color: var(--neutral-foreground-rest);
-    padding-left: calc(var(--design-unit) * 3px);
+.center {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 }
-
-    .navigation > ul {
-        list-style: none;
-        padding: 0;
-    }
-
-    .navigation h1 {
-        font-size: var(--type-ramp-plus-1-font-size);
-        line-height: var(--type-ramp-plus-1-line-height);
-        padding: 15px calc((10 + (var(--design-unit) * 2 * var(--density))) * 1px);
-        margin: 0;
-    }
-
-    .navigation fluent-anchor {
-        width: 100%;
-    }
-
-        .navigation fluent-anchor::part(control) {
-            justify-content: start;
-        }
-
-.content {
-    grid-area: content;
-    --elevation: 2;
-    background-color: var(--fill-color);
-    color: var(--neutral-foreground-rest);
-    padding-inline-start: calc(var(--design-unit) * 6px);
-    padding-inline-end: calc(var(--design-unit) * 6px);
-}
-
 
 #blazor-error-ui {
     background: lightyellow;

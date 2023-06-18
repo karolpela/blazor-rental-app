@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Components.Web;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
-using Microsoft.Fast.Components.FluentUI;
+using Radzen;
 using RentalApp.Client;
 
 var builder = WebAssemblyHostBuilder.CreateDefault(args);
@@ -9,11 +9,9 @@ builder.RootComponents.Add<HeadOutlet>("head::after");
 
 builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) });
 
-
-builder.Services.AddFluentUIComponents();
-
-//When using icons and/or emoji replace the line above with the code below
-//LibraryConfiguration config = new(ConfigurationGenerator.GetIconConfiguration(), ConfigurationGenerator.GetEmojiConfiguration());
-//builder.Services.AddFluentUIComponents(config);
+builder.Services.AddScoped<ContextMenuService>();
+builder.Services.AddScoped<DialogService>();
+builder.Services.AddScoped<NotificationService>();
+builder.Services.AddScoped<TooltipService>();
 
 await builder.Build().RunAsync();

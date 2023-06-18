@@ -1,15 +1,21 @@
-﻿@page "/"
+@page "/"
 
-<PageTitle>Index</PageTitle>
+<style>
+    .dashboard-button {
+        margin: 10px;
+        padding: 40px;
+        width: 20%;
+        height: 20%;
+        min-width: fit-content;
+        min-height: fit-content;
+        border-radius: 10px;
+    }
+</style>
 
-<h1>Hello, world!</h1>
+<PageTitle>Dashboard</PageTitle>
+<RadzenText Text="Dashboard" TextStyle="TextStyle.H3" TagName="TagName.H1" Style="margin-bottom: 60px"/>
 
-<p style="margin-bottom: 1rem;">
-    Welcome to your new app.
-</p>
 
-<FluentDesignSystemProvider FillColor="#D6D6D6">
-    <FluentCard neutral-palette-source="#CABA8C">
-        <SurveyPrompt Title="How is Blazor working for you?" />
-    </FluentCard>
-</FluentDesignSystemProvider>
+    <RadzenButton class="dashboard-button" Text="Register client" Click=@(() => NavigationManager.NavigateTo("register-client"))/>
+    <RadzenButton class="dashboard-button" Text="New rental" Click=@(() => NavigationManager.NavigateTo("new-rental"))/>
+    <RadzenButton class="dashboard-button" Text="Active rentals" Click=@(() => NavigationManager.NavigateTo("active-rentals"))/>
