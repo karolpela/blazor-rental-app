@@ -20,9 +20,9 @@
                         <RadzenFieldset Text="Properties">
                             <RadzenRow>
                                 <RadzenColumn>
-                                    <RadzenRow style="margin-bottom: 1rem">
-                                        <RadzenColumn Size="12" SizeMD="3" Style="display: flex">
-                                            <RadzenLabel Text="Client" Component="FirstName" style="width: 100%; align-self: center"/>
+                                    <RadzenRow style="margin-bottom: 1rem" AlignItems="Radzen.AlignItems.Center">
+                                        <RadzenColumn Size="12" SizeMD="3">
+                                            <RadzenLabel Text="Client" Component="FirstName" style="width: 100%"/>
                                         </RadzenColumn>
                                         <RadzenColumn Size="12" SizeMD="9">
                                             <RadzenRow>
@@ -30,9 +30,9 @@
                                             </RadzenRow>
                                         </RadzenColumn>
                                     </RadzenRow>
-                                    <RadzenRow style="margin-bottom: 1rem">
-                                        <RadzenColumn Size="12" SizeMD="3" Style="display: flex">
-                                            <RadzenLabel Text="Equipment" Component="FirstName" style="width: 100%; align-self: center"/>
+                                    <RadzenRow style="margin-bottom: 1rem" AlignItems="Radzen.AlignItems.Center">
+                                        <RadzenColumn Size="12" SizeMD="3">
+                                            <RadzenLabel Text="Equipment" Component="FirstName" style="width: 100%"/>
                                         </RadzenColumn>
                                         <RadzenColumn Size="12" SizeMD="9">
                                             <RadzenRow>
@@ -43,54 +43,46 @@
                                 </RadzenColumn>
                                 <RadzenColumn>
                                     <RadzenRow style="margin-bottom: 1rem" AlignItems="Radzen.AlignItems.Center">
-                                        <RadzenColumn Size="12" SizeMD="3" Style="display: flex">
-                                            <RadzenLabel Text="Start" Component="StartDate" style="width: 100%; align-self: center"/>
+                                        <RadzenColumn Size="12" SizeMD="3">
+                                            <RadzenLabel Text="Start" Component="StartDate" style="width: 100%"/>
                                         </RadzenColumn>
                                         <RadzenColumn Size="12" SizeMD="9">
                                             <RadzenDatePicker style="width: 100%" @bind-Value="rental.StartDate" Name="StartDate"/>
                                         </RadzenColumn>
                                     </RadzenRow>
-                                    <RadzenRow style="margin-bottom: 1rem">
-                                        <RadzenColumn Size="12" SizeMD="3" Style="display: flex">
-                                            <RadzenLabel Text="End" Component="EndDate" style="width: 100%; align-self: center"/>
+                                    <RadzenRow style="margin-bottom: 1rem" AlignItems="Radzen.AlignItems.Center">
+                                        <RadzenColumn Size="12" SizeMD="3">
+                                            <RadzenLabel Text="End" Component="EndDate" style="width: 100%"/>
                                         </RadzenColumn>
                                         <RadzenColumn Size="12" SizeMD="9">
-                                            <RadzenDatePicker style="width: 100%" @bind-Value="rental.EndDate" Name="EndDate" ShowTimeOkButton="true"/>
+                                            <RadzenDatePicker style="width: 100%" @bind-Value="rental.EndDate" Name="EndDate" />
                                         </RadzenColumn>
                                     </RadzenRow>
                                 </RadzenColumn>
                             </RadzenRow>
                             <RadzenRow>
-                                <RadzenColumn>
-                                    <RadzenText>per day: PLN 60</RadzenText>
+                                <RadzenColumn Size="8">
+                                    <RadzenText Text="per day: PLN 60" Style="color: #8f8f8f"></RadzenText>
                                 </RadzenColumn>
-                                <RadzenColumn></RadzenColumn>
-                                <RadzenColumn>
-                                    <RadzenText>base total: PLN 360</RadzenText>
+                                <RadzenColumn Size="4">
+                                    <RadzenText Text="base total: PLN 360"></RadzenText>
                                 </RadzenColumn>
                             </RadzenRow>
                         </RadzenFieldset>
                         <RadzenFieldset Text="Insurance">
                             <RadzenRow>
-                                <RadzenColumn>
-                                    <RadzenRow>
+                                <RadzenColumn Size="4">
+                                    <RadzenRow Style="height: 100%" AlignItems="Radzen.AlignItems.Center">
                                         <RadzenColumn>
                                             <RadzenCheckBox @bind-Value=@insuranceWanted Name="Insurance"/>
                                             <RadzenLabel Text="Insurance" Component="Insurance" style="width: 100%"/>
                                         </RadzenColumn>
-
                                     </RadzenRow>
-                                    <RadzenRow>
-                                        <RadzenColumn>
-                                            <RadzenText> per day: PLN 10</RadzenText>
-                                        </RadzenColumn>
-                                    </RadzenRow>
-
                                 </RadzenColumn>
-                                <RadzenColumn>
-                                    <RadzenRow style="margin-bottom: 1rem">
-                                        <RadzenColumn Size="12" SizeMD="3" Style="display: flex">
-                                            <RadzenLabel Text="PESEL" Component="Pesel" style="width: 100%; align-self: center"/>
+                                <RadzenColumn Size="4">
+                                    <RadzenRow style="margin-bottom: 1rem; height: 100%" AlignItems="Radzen.AlignItems.Center">
+                                        <RadzenColumn Size="12" SizeMD="3">
+                                            <RadzenLabel Text="PESEL" Component="Pesel" style="width: 100%"/>
                                         </RadzenColumn>
                                         <RadzenColumn Size="12" SizeMD="9">
                                             <RadzenRow>
@@ -99,40 +91,41 @@
                                         </RadzenColumn>
                                     </RadzenRow>
                                 </RadzenColumn>
-                                <RadzenColumn Style="display: flex">
-                                    <RadzenText Style="align-self: flex-end">insurance total: PLN 60</RadzenText>
+                            </RadzenRow>
+                            <RadzenRow>
+                                <RadzenColumn Size="8">
+                                    <RadzenText Text="per day: PLN 10" Style="color: #8f8f8f"></RadzenText>
+                                </RadzenColumn>
+                                <RadzenColumn Size="4" >
+                                    <RadzenText Text="insurance total: PLN 60"></RadzenText>
                                 </RadzenColumn>
                             </RadzenRow>
                         </RadzenFieldset>
                         <RadzenFieldset Text="Protective gear">
-                            <RadzenRow>
-                                <RadzenColumn>
-                                    <RadzenRow style="margin-bottom: 1rem" AlignItems="Radzen.AlignItems.Center">
-                                        <RadzenColumn Size="12" SizeMD="4" Style="display: flex">
-                                            <RadzenLabel Text="Protective gear" Component="ProtectiveGear" style="width: 100%; align-self: center"/>
-                                        </RadzenColumn>
-                                        <RadzenColumn Size="12" SizeMD="8">
-                                            <RadzenDropDown @bind-Value="selectedGear" Multiple="true" AllowClear="true" Placeholder="Select something" Data="@protectiveGear" Style="width: 100%;" TextProperty="Type" ValueProperty="Id" Name="ProtectiveGear"></RadzenDropDown>
-                                        </RadzenColumn>
-                                    </RadzenRow>
+                            <RadzenRow style="margin-bottom: 1rem" AlignItems="Radzen.AlignItems.Center">
+                                <RadzenColumn Size="12" SizeMD="4">
+                                    <RadzenLabel Text="Protective gear" Component="ProtectiveGear" style="width: 100%"/>
+                                </RadzenColumn>
+                                <RadzenColumn Size="12" SizeMD="8">
+                                    <RadzenDropDown @bind-Value="selectedGear" Multiple="true" AllowClear="true" Placeholder="Select something" Data="@protectiveGear" Style="width: 100%;" TextProperty="Type" ValueProperty="Id" Name="ProtectiveGear"></RadzenDropDown>
                                 </RadzenColumn>
                             </RadzenRow>
                             <RadzenRow>
-                                <RadzenColumn>
-                                    <RadzenText>per day: PLN 20</RadzenText>
+                                <RadzenColumn Size="8">
+                                    <RadzenText Text="per day: PLN 20" Style="color: #8f8f8f"></RadzenText>
                                 </RadzenColumn>
-                                <RadzenColumn></RadzenColumn>
-                                <RadzenColumn>
-                                    <RadzenText>gear cost total: PLN 120</RadzenText>
+                                <RadzenColumn Size="4">
+                                    <RadzenText Text="gear cost total: PLN 120"></RadzenText>
                                 </RadzenColumn>
                             </RadzenRow>
                         </RadzenFieldset>
                     </RadzenStack>
                 </RadzenColumn>
             </RadzenRow>
-            <RadzenStack Orientation="Orientation.Horizontal" AlignItems="AlignItems.Center" JustifyContent="JustifyContent.Center">
+            <RadzenStack Orientation="Radzen.Orientation.Vertical" AlignItems="AlignItems.Center" JustifyContent="JustifyContent.Center" Gap="1rem">
+                <RadzenText Text="Total cost: PLN 540" TextStyle="Radzen.Blazor.TextStyle.Body1" Style="text-transform: uppercase; font-weight: bold" />
                 <RadzenButton ButtonStyle="ButtonStyle.Primary" ButtonType="ButtonType.Submit" Icon="save" Text="Save" Variant="Variant.Flat"/>
-            </RadzenStack>
+</RadzenStack>
         </RadzenTemplateForm>
     }
 </RadzenCard>

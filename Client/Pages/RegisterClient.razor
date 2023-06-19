@@ -7,14 +7,20 @@
     </RadzenColumn>
 </RadzenRow>
 <RadzenCard Style="height: 80%; margin: 20px; max-height: 600px; width: 80%; max-width: 800px">
-    <RadzenTemplateForm TItem="RentalApp.Shared.Models.Person" Data="@person" Style="padding: 80px">
+@if (person == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+    {<RadzenTemplateForm TItem="RentalApp.Shared.Models.Person" Data="@person" Style="padding: 80px">
         <RadzenRow style="margin-bottom: 1rem">
             <RadzenColumn SizeMD="2">
                 <RadzenLabel Text="First Name" Component="FirstName" style="width: 100%" />
             </RadzenColumn>
             <RadzenColumn SizeMD="9">
               <RadzenTextBox style="display: block; width: 100%" @bind-Value="person.FirstName" Name="FirstName" AutoComplete="true" />
-              <RadzenRegexValidator Pattern="([A-Z][a-zA-Z]*)" Component="FirstName" Text="Not a valid first name"></RadzenRegexValidator>
+              <RadzenRegexValidator Pattern="([A-Z][a-zA-Z]*)" Component="FirstName" Text="Not a valid first na
+me"></RadzenRegexValidator>
             </RadzenColumn>
         </RadzenRow>
         <RadzenRow style="margin-bottom: 1rem">
@@ -39,7 +45,7 @@
         <RadzenStack Orientation="Orientation.Horizontal" AlignItems="Radzen.AlignItems.Start" JustifyContent="Radzen.JustifyContent.Center" Reverse="false" Style="margin-top: 40px">
                 <RadzenButton ButtonStyle="Radzen.ButtonStyle.Success" ButtonType="ButtonType.Submit" Icon="done" Text="Register" Variant="Radzen.Variant.Filled" />
         </RadzenStack>
-    </RadzenTemplateForm>
+    </RadzenTemplateForm>}
     
 </RadzenCard>
 <br/>
