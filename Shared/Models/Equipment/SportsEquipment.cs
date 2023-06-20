@@ -11,6 +11,8 @@ public abstract class SportsEquipment
     }
 
     public int Id { get; set; }
+    
+    public string? Discriminator { get; set; } //TODO ignore this in DB!
     public decimal Size { get; set; }
     public string Purpose { get; set; }
     public bool IsFunctional { get; set; }

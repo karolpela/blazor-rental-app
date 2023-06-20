@@ -1,48 +1,62 @@
 @page "/new-rental"
+@using RentalApp.Shared.Models
+@using RentalApp.Shared.Models.Equipment
+@using System.Text.RegularExpressions
 
-<PageTitle>NewRental</PageTitle>
+<PageTitle>New Rental</PageTitle>
 <RadzenRow>
     <RadzenColumn Size="12">
         <RadzenText Text="New Rental" TextStyle="TextStyle.H3" TagName="TagName.H1"/>
     </RadzenColumn>
 </RadzenRow>
 
-<RadzenCard Style="height: 80%; margin: 20px; max-height: 800px; width: 80%; max-width: 800px">
+<RadzenCard Style="width: 80%; max-width: 800px">
     @if (rental == null)
     {
     }
     else
     {
-        <RadzenTemplateForm TItem="RentalApp.Shared.Models.Rental" Data="@rental">
+        <RadzenTemplateForm TItem="Rental" Data="@rental">
             <RadzenRow>
                 <RadzenColumn>
                     <RadzenStack Gap="1rem">
                         <RadzenFieldset Text="Properties">
                             <RadzenRow>
                                 <RadzenColumn>
-                                    <RadzenRow style="margin-bottom: 1rem" AlignItems="Radzen.AlignItems.Center">
+                                    <RadzenRow style="margin-bottom: 1rem" AlignItems="AlignItems.Center">
                                         <RadzenColumn Size="12" SizeMD="3">
-                                            <RadzenLabel Text="Client" Component="FirstName" style="width: 100%"/>
+                                            <RadzenLabel Text="Client" Component="ClientId" style="width: 100%"/>
                                         </RadzenColumn>
                                         <RadzenColumn Size="12" SizeMD="9">
                                             <RadzenRow>
-                                                <RadzenDropDown @bind-Value="rental.Client" AllowClear="true" Placeholder="Select something" Data="@clients" Style="width: 100%;" TextProperty="FirstName" ValueProperty="Id" Name="PersonId"></RadzenDropDown>
+                                                <RadzenDropDown @bind-Value="rental.Client" TValue="Person" AllowClear="true" Placeholder="Select client" Data="@clients" Style="width: 100%;" TextProperty="FirstName" Name="ClientId" AllowFiltering="true" FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive">
+                                                    <Template Context="clientContext">
+                                                        @($"{(clientContext as Person).FirstName} {(clientContext as Person).LastName} ({(clientContext as Person).PhoneNumber})")
+                                                    </Template>
+                                                </RadzenDropDown>
                                             </RadzenRow>
                                         </RadzenColumn>
                                     </RadzenRow>
-                                    <RadzenRow style="margin-bottom: 1rem" AlignItems="Radzen.AlignItems.Center">
+                                    <RadzenRow style="margin-bottom: 1rem" AlignItems="AlignItems.Center">
                                         <RadzenColumn Size="12" SizeMD="3">
-                                            <RadzenLabel Text="Equipment" Component="FirstName" style="width: 100%"/>
+                                            <RadzenLabel Text="Equipment" Component="EquipmentId" style="width: 100%"/>
                                         </RadzenColumn>
                                         <RadzenColumn Size="12" SizeMD="9">
                                             <RadzenRow>
-                                                <RadzenDropDown @bind-Value="rental.Equipment" AllowClear="true" Placeholder="Select something" Data="@equipment" Style="width: 100%;" TextProperty="Purpose" ValueProperty="Id" Name="EquipmentId"></RadzenDropDown>
+                                                <RadzenDropDown @bind-Value="rental.Equipment" TValue="SportsEquipment" AllowClear="true" Placeholder="Select equipment" Data="@equipment" Style="width: 100%;" TextProperty="Purpose" Name="EquipmentId" AllowFiltering="true" FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive">
+                                                    <Template Context="equipmentContext">
+                                                        @($"{(equipmentContext as SportsEquipment).Purpose} " +
+                                                          $"{Regex.Replace((equipmentContext as SportsEquipment).Discriminator, "(?<=[a-z])([A-Z])", " $1")} " +
+                                                          $"{(equipmentContext as SportsEquipment).Size} " +
+                                                          $"({(equipmentContext as SportsEquipment).Id})")
+                                                    </Template>
+                                                </RadzenDropDown>
                                             </RadzenRow>
                                         </RadzenColumn>
                                     </RadzenRow>
                                 </RadzenColumn>
                                 <RadzenColumn>
-                                    <RadzenRow style="margin-bottom: 1rem" AlignItems="Radzen.AlignItems.Center">
+                                    <RadzenRow style="margin-bottom: 1rem" AlignItems="AlignItems.Center">
                                         <RadzenColumn Size="12" SizeMD="3">
                                             <RadzenLabel Text="Start" Component="StartDate" style="width: 100%"/>
                                         </RadzenColumn>
@@ -50,12 +64,12 @@
                                             <RadzenDatePicker style="width: 100%" @bind-Value="rental.StartDate" Name="StartDate"/>
                                         </RadzenColumn>
                                     </RadzenRow>
-                                    <RadzenRow style="margin-bottom: 1rem" AlignItems="Radzen.AlignItems.Center">
+                                    <RadzenRow style="margin-bottom: 1rem" AlignItems="AlignItems.Center">
                                         <RadzenColumn Size="12" SizeMD="3">
                                             <RadzenLabel Text="End" Component="EndDate" style="width: 100%"/>
                                         </RadzenColumn>
                                         <RadzenColumn Size="12" SizeMD="9">
-                                            <RadzenDatePicker style="width: 100%" @bind-Value="rental.EndDate" Name="EndDate" />
+                                            <RadzenDatePicker style="width: 100%" @bind-Value="rental.ScheduledEndDate" Name="EndDate"/>
                                         </RadzenColumn>
                                     </RadzenRow>
                                 </RadzenColumn>
@@ -72,15 +86,15 @@
                         <RadzenFieldset Text="Insurance">
                             <RadzenRow>
                                 <RadzenColumn Size="4">
-                                    <RadzenRow Style="height: 100%" AlignItems="Radzen.AlignItems.Center">
+                                    <RadzenRow Style="height: 100%" AlignItems="AlignItems.Center">
                                         <RadzenColumn>
-                                            <RadzenCheckBox @bind-Value=@insuranceWanted Name="Insurance"/>
+                                            <RadzenCheckBox @bind-Value=@InsuranceWanted Name="Insurance"/>
                                             <RadzenLabel Text="Insurance" Component="Insurance" style="width: 100%"/>
                                         </RadzenColumn>
                                     </RadzenRow>
                                 </RadzenColumn>
                                 <RadzenColumn Size="4">
-                                    <RadzenRow style="margin-bottom: 1rem; height: 100%" AlignItems="Radzen.AlignItems.Center">
+                                    <RadzenRow style="margin-bottom: 1rem; height: 100%" AlignItems="AlignItems.Center">
                                         <RadzenColumn Size="12" SizeMD="3">
                                             <RadzenLabel Text="PESEL" Component="Pesel" style="width: 100%"/>
                                         </RadzenColumn>
@@ -96,13 +110,13 @@
                                 <RadzenColumn Size="8">
                                     <RadzenText Text="per day: PLN 10" Style="color: #8f8f8f"></RadzenText>
                                 </RadzenColumn>
-                                <RadzenColumn Size="4" >
+                                <RadzenColumn Size="4">
                                     <RadzenText Text="insurance total: PLN 60"></RadzenText>
                                 </RadzenColumn>
                             </RadzenRow>
                         </RadzenFieldset>
                         <RadzenFieldset Text="Protective gear">
-                            <RadzenRow style="margin-bottom: 1rem" AlignItems="Radzen.AlignItems.Center">
+                            <RadzenRow style="margin-bottom: 1rem" AlignItems="AlignItems.Center">
                                 <RadzenColumn Size="12" SizeMD="4">
                                     <RadzenLabel Text="Protective gear" Component="ProtectiveGear" style="width: 100%"/>
                                 </RadzenColumn>
@@ -122,10 +136,10 @@
                     </RadzenStack>
                 </RadzenColumn>
             </RadzenRow>
-            <RadzenStack Orientation="Radzen.Orientation.Vertical" AlignItems="AlignItems.Center" JustifyContent="JustifyContent.Center" Gap="1rem">
-                <RadzenText Text="Total cost: PLN 540" TextStyle="Radzen.Blazor.TextStyle.Body1" Style="text-transform: uppercase; font-weight: bold" />
+            <RadzenStack Orientation="Orientation.Vertical" AlignItems="AlignItems.Center" JustifyContent="JustifyContent.Center" Gap="1rem">
+                <RadzenText Text="Total cost: PLN 540" TextStyle="TextStyle.Body1" Style="text-transform: uppercase; font-weight: bold"/>
                 <RadzenButton ButtonStyle="ButtonStyle.Primary" ButtonType="ButtonType.Submit" Icon="save" Text="Save" Variant="Variant.Flat"/>
-</RadzenStack>
+            </RadzenStack>
         </RadzenTemplateForm>
     }
 </RadzenCard>

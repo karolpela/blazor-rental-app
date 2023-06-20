@@ -1,38 +1,66 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.JSInterop;
+using System.Collections;
+using System.Net.Http.Json;
+using System.Text.Json;
+using Humanizer;
 using Microsoft.AspNetCore.Components;
-using Microsoft.AspNetCore.Components.Web;
-using Radzen;
-using Radzen.Blazor;
+using Microsoft.JSInterop;
+using RentalApp.Shared.Converters;
 using RentalApp.Shared.Models;
 using RentalApp.Shared.Models.Equipment;
-using RentalApp.Shared.Models.Equipment.Skates;
 
-namespace RentalApp.Client.Pages
+namespace RentalApp.Client.Pages;
+
+public partial class NewRental
 {
-    public partial class NewRental
+    [Inject] protected IJSRuntime JSRuntime { get; set; } = default!;
+
+    [Inject] protected NavigationManager NavigationManager { get; set; } = default!;
+
+    [Inject] protected HttpClient Http { get; set; } = default!;
+
+    private IEnumerable<Person>? clients;
+
+    private IEnumerable<SportsEquipment>? equipment;
+
+    private string pesel = "09328402943";
+
+    private IEnumerable<ProtectiveGear>? protectiveGear;
+
+    private Rental rental = new(
+        DateTimeOffset.Now,
+        DateTimeOffset.Now,
+        null,
+        false);
+
+    private IEnumerable<int> selectedGear = Array.Empty<int>();
+
+    private bool _insuranceWanted;
+
+    private Insurance insurance = new Insurance();
+    
+    private bool InsuranceWanted
     {
-        [Inject]
-        protected IJSRuntime JSRuntime { get; set; } = default!;
+        get => _insuranceWanted;
+        set
+        {
+            _insuranceWanted = value;
+            rental.Insurance = _insuranceWanted
+                ? insurance
+                : null;
+        }
+    }
 
-        [Inject]
-        protected NavigationManager NavigationManager { get; set; } = default!;
-
-        protected RentalApp.Shared.Models.Rental rental = new RentalApp.Shared.Models.Rental();
-
-        protected List<Person> clients = new List<Person>();
+    protected override async Task OnInitializedAsync()
+    {
+        clients = await Http.GetFromJsonAsync<IEnumerable<Person>>("api/People?role=client&sort=firstName");
         
-        protected List<IceSkates> equipment = new List<IceSkates>();
+        var response = await Http.GetAsync("api/Equipment");
+        var responseText = await response.Content.ReadAsStringAsync();
 
-        protected bool insuranceWanted = false;
+        var options = new JsonSerializerOptions();
+        options.Converters.Add(new SportsEquipmentConverter());
 
-        protected string pesel = "09328402943";
+        equipment = JsonSerializer.Deserialize<IEnumerable<SportsEquipment>>(responseText, options);
         
-        protected List<ProtectiveGear> protectiveGear = new List<ProtectiveGear>();
-        IEnumerable<int> selectedGear = new int[] { 1, 2 };
-
     }
 }
