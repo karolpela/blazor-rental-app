@@ -1,51 +1,53 @@
 @page "/register-client"
+@using RentalApp.Shared.Models
 
 <PageTitle>RegisterClient</PageTitle>
 <RadzenRow>
     <RadzenColumn Size="12">
-        <RadzenText Text="Register Client" TextStyle="TextStyle.H3" TagName="TagName.H1" />
+        <RadzenText Text="Register Client" TextStyle="TextStyle.H3" TagName="TagName.H1"/>
     </RadzenColumn>
 </RadzenRow>
 <RadzenCard Style="height: 80%; margin: 20px; max-height: 600px; width: 80%; max-width: 800px">
-@if (person == null)
-{
-    <p><em>Loading...</em></p>
-}
-else
-    {<RadzenTemplateForm TItem="RentalApp.Shared.Models.Person" Data="@person" Style="padding: 80px">
-        <RadzenRow style="margin-bottom: 1rem">
-            <RadzenColumn SizeMD="2">
-                <RadzenLabel Text="First Name" Component="FirstName" style="width: 100%" />
-            </RadzenColumn>
-            <RadzenColumn SizeMD="9">
-              <RadzenTextBox style="display: block; width: 100%" @bind-Value="person.FirstName" Name="FirstName" AutoComplete="true" />
-              <RadzenRegexValidator Pattern="([A-Z][a-zA-Z]*)" Component="FirstName" Text="Not a valid first na
-me"></RadzenRegexValidator>
-            </RadzenColumn>
-        </RadzenRow>
-        <RadzenRow style="margin-bottom: 1rem">
-            <RadzenColumn SizeMD="2">
-                <RadzenLabel Text="Last Name" Component="LastName" style="width: 100%" />
-            </RadzenColumn>
-            <RadzenColumn SizeMD="9">
-              <RadzenTextBox style="display: block; width: 100%" @bind-Value="person.LastName" Name="LastName" AutoComplete="true" />
-              <RadzenRegexValidator Pattern="([A-Z][a-zA-Z]*)" Component="LastName" Text="Not a valid last name"></RadzenRegexValidator>
-            </RadzenColumn>
-        </RadzenRow>
-        <RadzenRow style="margin-bottom: 1rem">
-            <RadzenColumn SizeMD="2">
-                <RadzenLabel Text="Phone no." Component="PhoneNo" style="width: 100%" />
-            </RadzenColumn>
-            <RadzenColumn SizeMD="9">
-              <RadzenTextBox style="display: block; width: 100%" @bind-Value="person.PhoneNumber" Name="PhoneNo" AutoComplete="true" />
-              <RadzenRegexValidator Text="Not a valid phone number" Pattern="\d{9}" Component="PhoneNo"></RadzenRegexValidator>
-              <RadzenCustomValidator Style="display: block" Text="User with this number already exists"></RadzenCustomValidator>
-            </RadzenColumn>
-        </RadzenRow>
-        <RadzenStack Orientation="Orientation.Horizontal" AlignItems="Radzen.AlignItems.Start" JustifyContent="Radzen.JustifyContent.Center" Reverse="false" Style="margin-top: 40px">
-                <RadzenButton ButtonStyle="Radzen.ButtonStyle.Success" ButtonType="ButtonType.Submit" Icon="done" Text="Register" Variant="Radzen.Variant.Filled" />
-        </RadzenStack>
-    </RadzenTemplateForm>}
-    
+    @if (client == null)
+    {
+        <p>
+            <em>Loading...</em>
+        </p>
+    }
+    else
+    {
+        <RadzenTemplateForm @ref="form" TItem="Person" Data="@client" Style="padding: 80px">
+            <RadzenRow style="margin-bottom: 1rem">
+                <RadzenColumn SizeMD="2">
+                    <RadzenLabel Text="First Name" Component="FirstName" style="width: 100%"/>
+                </RadzenColumn>
+                <RadzenColumn SizeMD="9">
+                    <RadzenTextBox style="display: block; width: 100%" @bind-Value="client.FirstName" Name="FirstName" AutoComplete="true"/>
+                    <RadzenRegexValidator Pattern="([a-zA-Z]+)" Component="FirstName" Text="Not a valid first name" Style="display: block"></RadzenRegexValidator>
+                </RadzenColumn>
+            </RadzenRow>
+            <RadzenRow style="margin-bottom: 1rem">
+                <RadzenColumn SizeMD="2">
+                    <RadzenLabel Text="Last Name" Component="LastName" style="width: 100%"/>
+                </RadzenColumn>
+                <RadzenColumn SizeMD="9">
+                    <RadzenTextBox style="display: block; width: 100%" @bind-Value="client.LastName" Name="LastName" AutoComplete="true"/>
+                    <RadzenRegexValidator Pattern="([a-zA-Z]+)" Component="LastName" Text="Not a valid last name" Style="display: block"></RadzenRegexValidator>
+                </RadzenColumn>
+            </RadzenRow>
+            <RadzenRow style="margin-bottom: 1rem">
+                <RadzenColumn SizeMD="2">
+                    <RadzenLabel Text="Phone no." Component="PhoneNo" style="width: 100%"/>
+                </RadzenColumn>
+                <RadzenColumn SizeMD="9">
+                    <RadzenTextBox style="display: block; width: 100%" @bind-Value="client.PhoneNumber" Name="PhoneNo" AutoComplete="true"/>
+                    <RadzenRegexValidator Text="Not a valid phone number" Pattern="\d{9}" Style="display: block" Component="PhoneNo"></RadzenRegexValidator>
+                    <RadzenCompareValidator Operator="CompareOperator.NotEqual" Value="badNumber" Component="PhoneNo" Style="display: block" Text="User with this number already exists"></RadzenCompareValidator>
+                </RadzenColumn>
+            </RadzenRow>
+            <RadzenStack Orientation="Orientation.Horizontal" AlignItems="AlignItems.Start" JustifyContent="JustifyContent.Center" Reverse="false" Style="margin-top: 40px">
+                <RadzenButton Disabled="@(!form?.IsValid ?? true)" ButtonStyle="ButtonStyle.Success" ButtonType="ButtonType.Submit" Icon="done" Text="Register" Variant="Variant.Filled" Click="AddClient"/>
+            </RadzenStack>
+        </RadzenTemplateForm>
+    }
 </RadzenCard>
-<br/>

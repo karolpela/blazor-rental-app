@@ -35,8 +35,13 @@ public class RentalAppContext : DbContext
 
         modelBuilder.Entity<Rental>(e =>
         {
+            e.HasOne(r => r.Client)
+                .WithMany(p => p.Rentals)
+                .HasForeignKey(r => r.ClientId);
+
             e.HasOne(r => r.Equipment)
-                .WithMany(se => se.Rentals);
+                .WithMany(se => se.Rentals)
+                .HasForeignKey(r => r.EquipmentId);
 
             e.HasOne(r => r.Insurance)
                 .WithOne(i => i.Rental)
@@ -46,9 +51,21 @@ public class RentalAppContext : DbContext
                 .WithMany(pg => pg.Rentals);
         });
 
-        modelBuilder.Entity<Person>()
-            .HasMany(p => p.Subordinates)
-            .WithOne(p => p.Supervisor)
-            .IsRequired(false);
+        modelBuilder.Entity<Person>(e =>
+        {
+            e.HasMany(p => p.Subordinates)
+                .WithOne(p => p.Supervisor)
+                .IsRequired(false);
+
+            // Check if the role contains 'Client' (bitwise AND with 1)
+            e.HasIndex(p => p.PhoneNumber)
+                .IsUnique()
+                .HasFilter("[Role] & 1 = 1");
+
+            // Check if the role contains 'Attendant', 'Mechanic', or 'Owner' (bitwise AND with 2, 4, and 8 respectively)
+            e.HasIndex(p => p.EmployeeId)
+                .IsUnique()
+                .HasFilter("[Role] & 2 = 2 OR [Role] & 4 = 4 OR [Role] & 8 = 8");
+        });
     }
 }

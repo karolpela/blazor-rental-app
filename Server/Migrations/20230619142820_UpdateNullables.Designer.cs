@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using RentalApp.Server.Data;
 
@@ -10,9 +11,11 @@ using RentalApp.Server.Data;
 namespace RentalApp.Server.Migrations
 {
     [DbContext(typeof(RentalAppContext))]
-    partial class RentalAppContextModelSnapshot : ModelSnapshot
+    [Migration("20230619142820_UpdateNullables")]
+    partial class UpdateNullables
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "7.0.7");
@@ -108,14 +111,6 @@ namespace RentalApp.Server.Migrations
                         .HasColumnType("INTEGER");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("EmployeeId")
-                        .IsUnique()
-                        .HasFilter("[Role] & 2 = 2 OR [Role] & 4 = 4 OR [Role] & 8 = 8");
-
-                    b.HasIndex("PhoneNumber")
-                        .IsUnique()
-                        .HasFilter("[Role] & 1 = 1");
 
                     b.HasIndex("SupervisorId");
 

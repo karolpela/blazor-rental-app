@@ -3,44 +3,37 @@ namespace RentalApp.Shared.Models;
 [Flags]
 public enum PersonRole
 {
-    Client = 0,
-    Attendant = 1,
-    Mechanic = 2,
-    Owner = 4
+    Client = 1,
+    Attendant = 2,
+    Mechanic = 3,
+    Owner = 8
 }
 
 public class Person
 {
-    public Person(int id, PersonRole role, string firstName, string lastName, string pesel, string phoneNumber,
-        string employeeId, DateTimeOffset employmentDate, DateTimeOffset? dismissalDate)
+    public Person(PersonRole role, string firstName, string lastName)
     {
-        Id = id;
         Role = role;
         FirstName = firstName;
         LastName = lastName;
-        Pesel = pesel;
-        PhoneNumber = phoneNumber;
-        EmployeeId = employeeId;
-        EmploymentDate = employmentDate;
-        DismissalDate = dismissalDate;
     }
 
     public int Id { get; set; }
-    public PersonRole Role { get; set; }
+    public PersonRole Role { get; set; } // TODO server-side validation?
     public string FirstName { get; set; }
     public string LastName { get; set; }
-    public string Pesel { get; set; }
+    public string? Pesel { get; set; }
 
     // Client only properties
-    public string PhoneNumber { get; set; }
+    public string? PhoneNumber { get; set; }
 
     public IEnumerable<Rental> Rentals { get; set; } = new List<Rental>();
 
     // End client only properties
 
     // Employee only properties
-    public string EmployeeId { get; set; }
-    public DateTimeOffset EmploymentDate { get; set; }
+    public string? EmployeeId { get; set; }
+    public DateTimeOffset? EmploymentDate { get; set; }
     public DateTimeOffset? DismissalDate { get; set; }
 
     public Person? Supervisor { get; set; }
