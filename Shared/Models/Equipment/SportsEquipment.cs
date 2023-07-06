@@ -1,3 +1,5 @@
+using System.Text.Json.Serialization;
+
 namespace RentalApp.Shared.Models.Equipment;
 
 public abstract class SportsEquipment
@@ -11,11 +13,12 @@ public abstract class SportsEquipment
     }
 
     public int Id { get; set; }
-    
+
     public string? Discriminator { get; set; } //TODO ignore this in DB!
     public decimal Size { get; set; }
     public string Purpose { get; set; }
     public bool IsFunctional { get; set; }
+    public decimal HourlyFee { get; set; }
 
-    public IEnumerable<Rental> Rentals { get; } = new List<Rental>();
+    [JsonIgnore] public IEnumerable<Rental> Rentals { get; } = new List<Rental>();
 }

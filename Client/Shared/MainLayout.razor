@@ -1,14 +1,16 @@
 @inherits LayoutComponentBase
 
-<PageTitle>fluent</PageTitle>
+<PageTitle>Rental App</PageTitle>
 
 <ErrorBoundary>
     <ChildContent>
-    <div class="center">
-        @Body
-    </div>
+        <div class="center">
+            @Body
+        </div>
     </ChildContent>
     <ErrorContent Context="ex">
         <p class="error">@ex.Message</p>
     </ErrorContent>
 </ErrorBoundary>
+
+<RadzenDialog/>

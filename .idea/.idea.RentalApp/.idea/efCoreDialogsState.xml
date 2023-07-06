@@ -5,7 +5,10 @@
       <map>
         <entry key="Common:b3944be3-c0d8-4478-90d5-74a1f590d0f9:dbContext" value="RentalApp.Server.Data.RentalAppContext" />
         <entry key="Common:buildConfiguration" value="Debug" />
+        <entry key="Common:idempotent" value="false" />
         <entry key="Common:noBuild" value="false" />
+        <entry key="Common:noTransactions" value="false" />
+        <entry key="Common:outputFilePath" value="script.sql" />
         <entry key="Common:outputFolder" value="Migrations" />
         <entry key="Common:useDefaultConnection" value="true" />
       </map>

@@ -1,3 +1,5 @@
+using System.Text.Json.Serialization;
+
 namespace RentalApp.Shared.Models;
 
 public class ProtectiveGear
@@ -14,5 +16,5 @@ public class ProtectiveGear
     public string Type { get; set; }
     public string Size { get; set; }
 
-    public IEnumerable<Rental> Rentals { get; } = new List<Rental>();
+    [JsonIgnore] public IEnumerable<Rental> Rentals { get; } = new List<Rental>();
 }

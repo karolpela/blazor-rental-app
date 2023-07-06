@@ -1,9 +1,56 @@
 @page "/active-rentals"
+@using RentalApp.Shared.Models
+@using System.Text.RegularExpressions
 
 <PageTitle>ActiveRentals</PageTitle>
-<RadzenRow>
+<RadzenRow Style="margin-bottom: 2rem">
     <RadzenColumn Size="12">
-        <RadzenText Text="ActiveRentals" TextStyle="TextStyle.H3" TagName="TagName.H1" />
+        <RadzenText Text="Active rentals" TextStyle="TextStyle.H3" TagName="TagName.H1"/>
     </RadzenColumn>
 </RadzenRow>
-<RadzenDataGrid TItem="dynamic"></RadzenDataGrid>
+<RadzenDataGrid
+    TItem="Rental" Data="@rentals"
+    AllowSorting="false" AllowPaging="false" AllowFiltering="false"
+    LoadData="@rentalsLoadData" Count="@rentalsCount"
+    Style="max-width: 1200px; margin: 0 1rem">
+    <Columns>
+        <RadzenDataGridColumn TItem="Rental" Title="Client" TextAlign="TextAlign.Center">
+            <Template Context="clientContext">
+                @($"{clientContext.Client.FirstName} " +
+                  $"{clientContext.Client.LastName}")
+            </Template>
+        </RadzenDataGridColumn>
+        <RadzenDataGridColumn TItem="Rental" Title="Equipment" TextAlign="TextAlign.Center">
+            <Template Context="rental">
+                @($"{rental.Equipment.Purpose} " +
+                  $"{Regex.Replace(rental.Equipment.Discriminator ?? string.Empty, "(?<=[a-z])([A-Z])", " $1")} " +
+                  $"{rental.Equipment.Size}")
+            </Template>
+        </RadzenDataGridColumn>
+        <RadzenDataGridColumn TItem="Rental" Property="StartDate" Title="Start Date" TextAlign="TextAlign.Center">
+            <Template Context="rental">
+                @rental.StartDate.ToString("yyyy-MM-dd HH:mm")
+            </Template>
+        </RadzenDataGridColumn>
+        <RadzenDataGridColumn TItem="Rental" Property="ScheduledEndDate" Title="Scheduled End Date" TextAlign="TextAlign.Center">
+            <Template Context="rental">
+                @rental.ScheduledEndDate.ToString("yyyy-MM-dd HH:mm")
+            </Template>
+        </RadzenDataGridColumn>
+        <RadzenDataGridColumn TItem="Rental" Property="Overdue" Title="Overdue" Width="7%" TextAlign="TextAlign.Center">
+            <Template Context="rental">
+                @{
+                    var overdue = rental.Overdue;
+                }
+                <RadzenCheckBox @bind-Value="overdue" ReadOnly="true"></RadzenCheckBox>
+            </Template>
+        </RadzenDataGridColumn>
+        <RadzenDataGridColumn TItem="Rental" Title="Actions" Property="" TextAlign="TextAlign.Center" Width="25%">
+            <Template >
+                <RadzenButton Text="End" ButtonStyle="ButtonStyle.Success"></RadzenButton>
+                <RadzenButton Text="End (damaged)" ButtonStyle="ButtonStyle.Warning"></RadzenButton>
+            </Template>
+
+        </RadzenDataGridColumn>
+    </Columns>
+</RadzenDataGrid>

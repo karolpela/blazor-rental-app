@@ -1,0 +1,94 @@
+[
+  {
+    "id": 1,
+    "role": 1,
+    "firstName": "Aubrey",
+    "lastName": "Hurworth",
+    "phoneNumber": "190684116",
+    "pesel": "34556468065"
+  },
+  {
+    "id": 2,
+    "role": 3,
+    "firstName": "Duncan",
+    "lastName": "Agius",
+    "phoneNumber": "456100995",
+    "employeeId": "e1"
+  },
+  {
+    "id": 3,
+    "role": 1,
+    "firstName": "Colby",
+    "lastName": "Lisciandro",
+    "phoneNumber": "391899786",
+    "employeeId": "e2",
+    "pesel": "66100957666"
+  },
+  {
+    "id": 4,
+    "role": 1,
+    "firstName": "Sherilyn",
+    "lastName": "Cornewall",
+    "phoneNumber": "198315600"
+  },
+  {
+    "id": 5,
+    "role": 4,
+    "firstName": "Isadora",
+    "lastName": "Casel",
+    "employeeId": "e3"
+  },
+  {
+    "id": 6,
+    "role": 1,
+    "firstName": "Hermina",
+    "lastName": "Edgley",
+    "phoneNumber": "882627905",
+    "pesel": "84576111796"
+  },
+  {
+    "id": 7,
+    "role": 4,
+    "firstName": "Beckie",
+    "lastName": "Fann",
+    "employeeId": "e4"
+  },
+  {
+    "id": 8,
+    "role": 2,
+    "firstName": "Shelley",
+    "lastName": "Molyneaux",
+    "employeeId": "e5"
+  },
+  {
+    "id": 9,
+    "role": 3,
+    "firstName": "Yasmin",
+    "lastName": "Beecker",
+    "phoneNumber": "362667890",
+    "employeeId": "e6",
+    "pesel": "98155940198"
+  },
+  {
+    "id": 10,
+    "role": 4,
+    "firstName": "Nollie",
+    "lastName": "Anglish",
+    "employeeId": "e7"
+  },
+  {
+    "id": 11,
+    "role": 5,
+    "firstName": "Carmencita",
+    "lastName": "Tattam",
+    "phoneNumber": "800838101",
+    "employeeId": "e8"
+  },
+  {
+    "id": 12,
+    "role": 2,
+    "firstName": "Lucas",
+    "lastName": "Faughny",
+    "employeeId": "e9"
+  }
+]

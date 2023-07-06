@@ -11,7 +11,7 @@ builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri(builder.
 
 // builder.Services.AddScoped<ContextMenuService>();
 builder.Services.AddScoped<DialogService>();
-// builder.Services.AddScoped<NotificationService>();
+builder.Services.AddScoped<NotificationService>();
 // builder.Services.AddScoped<TooltipService>();
 
 await builder.Build().RunAsync();

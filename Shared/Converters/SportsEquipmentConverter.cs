@@ -15,16 +15,16 @@ public class SportsEquipmentConverter : JsonConverter<SportsEquipment>
 
         SportsEquipment? result = discriminator switch
         {
-            "IceSkates" => JsonSerializer.Deserialize<IceSkates>(jsonObject.GetRawText(), options),
-            "InlineSkates" => JsonSerializer.Deserialize<InlineSkates>(jsonObject.GetRawText(), options),
-            "RollerSkates" => JsonSerializer.Deserialize<RollerSkates>(jsonObject.GetRawText(), options),
+            "IceSkates" => JsonSerializer.Deserialize<IceSkates>(jsonObject.GetRawText()),
+            "InlineSkates" => JsonSerializer.Deserialize<InlineSkates>(jsonObject.GetRawText()),
+            "RollerSkates" => JsonSerializer.Deserialize<RollerSkates>(jsonObject.GetRawText()),
             _ => throw new ArgumentException($"Invalid discriminator value: {discriminator}")
         };
 
         return result;
     }
 
-    
+
     public override void Write(Utf8JsonWriter writer, SportsEquipment value, JsonSerializerOptions options)
     {
         writer.WriteStartObject();
@@ -33,6 +33,7 @@ public class SportsEquipmentConverter : JsonConverter<SportsEquipment>
         writer.WriteNumber("Size", value.Size);
         writer.WriteString("Purpose", value.Purpose);
         writer.WriteBoolean("IsFunctional", value.IsFunctional);
+        writer.WriteNumber("HourlyFee", value.HourlyFee);
 
         switch (value)
         {

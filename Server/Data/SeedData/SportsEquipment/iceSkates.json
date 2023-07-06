@@ -1,0 +1,83 @@
+[
+  {
+    "Id": 5,
+    "Size": 38,
+    "Purpose": "Performance",
+    "IsFunctional": true,
+    "BladeMaterial": "Steel",
+    "HasToePick": true,
+    "HourlyFee": 3
+  },
+  {
+    "Id": 7,
+    "Size": 47,
+    "Purpose": "Figure",
+    "IsFunctional": false,
+    "BladeMaterial": "Carbon Fiber",
+    "HasToePick": true,
+    "HourlyFee": 4
+  },
+  {
+    "Id": 9,
+    "Size": 38,
+    "Purpose": "Performance",
+    "IsFunctional": true,
+    "BladeMaterial": "Steel",
+    "HasToePick": true,
+    "HourlyFee": 2
+  },
+  {
+    "Id": 10,
+    "Size": 43,
+    "Purpose": "Hockey",
+    "IsFunctional": false,
+    "BladeMaterial": "Carbon Fiber",
+    "HasToePick": true,
+    "HourlyFee": 5
+  },
+  {
+    "Id": 11,
+    "Size": 47,
+    "Purpose": "Hockey",
+    "IsFunctional": false,
+    "BladeMaterial": "Steel",
+    "HasToePick": false,
+    "HourlyFee": 4
+  },
+  {
+    "Id": 13,
+    "Size": 42,
+    "Purpose": "Figure",
+    "IsFunctional": true,
+    "BladeMaterial": "Steel",
+    "HasToePick": false,
+    "HourlyFee": 2
+  },
+  {
+    "Id": 15,
+    "Size": 37,
+    "Purpose": "Performance",
+    "IsFunctional": false,
+    "BladeMaterial": "Aluminum",
+    "HasToePick": false,
+    "HourlyFee": 3
+  },
+  {
+    "Id": 16,
+    "Size": 45,
+    "Purpose": "Hockey",
+    "IsFunctional": true,
+    "BladeMaterial": "Steel",
+    "HasToePick": false,
+    "HourlyFee": 5
+  },
+  {
+    "Id": 19,
+    "Size": 42,
+    "Purpose": "Figure",
+    "IsFunctional": true,
+    "BladeMaterial": "Plastic",
+    "HasToePick": true,
+    "HourlyFee": 3
+  }
+]

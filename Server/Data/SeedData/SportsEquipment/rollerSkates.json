@@ -1,0 +1,42 @@
+[
+  {
+    "Id": 1,
+    "Size": 44,
+    "Purpose": "Performance",
+    "IsFunctional": true,
+    "WheelHardness": 36,
+    "HourlyFee": 3
+  },
+  {
+    "Id": 2,
+    "Size": 46,
+    "Purpose": "Figure",
+    "IsFunctional": false,
+    "WheelHardness": 75,
+    "HourlyFee": 2
+  },
+  {
+    "Id": 3,
+    "Size": 47,
+    "Purpose": "Figure",
+    "IsFunctional": true,
+    "WheelHardness": 10,
+    "HourlyFee": 4
+  },
+  {
+    "Id": 14,
+    "Size": 42,
+    "Purpose": "Figure",
+    "IsFunctional": false,
+    "WheelHardness": 91,
+    "HourlyFee": 5
+  },
+  {
+    "Id": 20,
+    "Size": 43,
+    "Purpose": "Hockey",
+    "IsFunctional": true,
+    "WheelHardness": 89,
+    "HourlyFee": 2
+  }
+]

@@ -1,4 +1,7 @@
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using RentalApp.Server.Data;
+using RentalApp.Shared.Converters;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -13,23 +16,27 @@ builder.Services.AddSwaggerDocument(config =>
     {
         document.Info.Version = "v1";
         document.Info.Title = "Rental Shop API";
-        // document.Info.Description = "Local Web API for Rental Shop";
-        // document.Info.TermsOfService = "None";
-        // document.Info.Contact = new NSwag.OpenApiContact
-        // {
-        //     Name = "Shayne Boyer",
-        //     Email = string.Empty,
-        //     Url = "https://twitter.com/spboyer"
-        // };
-        // document.Info.License = new NSwag.OpenApiLicense
-        // {
-        //     Name = "Use under LICX",
-        //     Url = "https://example.com/license"
-        // };
     };
 });
 
+builder.Services.Configure<JsonOptions>(options =>
+{
+    options.JsonSerializerOptions.Converters.Add(new SportsEquipmentConverter());
+});
+
 var app = builder.Build();
+
+// Apply migrations
+using (var scope = app.Services.CreateScope())
+{
+    var services = scope.ServiceProvider;
+    var context = services.GetRequiredService<RentalAppContext>();
+
+    context.Database.Migrate();
+    //
+    // var script = File.ReadAllText(Path.Combine("seedRental.sql"));
+    // context.Database.ExecuteSqlRaw(script);
+}
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())

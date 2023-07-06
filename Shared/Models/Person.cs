@@ -1,3 +1,5 @@
+using System.Text.Json.Serialization;
+
 namespace RentalApp.Shared.Models;
 
 [Flags]
@@ -27,7 +29,7 @@ public class Person
     // Client only properties
     public string? PhoneNumber { get; set; }
 
-    public IEnumerable<Rental> Rentals { get; set; } = new List<Rental>();
+    [JsonIgnore] public IEnumerable<Rental> Rentals { get; set; } = new List<Rental>();
 
     // End client only properties
 

@@ -1,7 +1,10 @@
+using System.Text.Json.Serialization;
+
 namespace RentalApp.Shared.Models.Equipment.Skates;
 
 public class InlineSkates : SportsEquipment
 {
+    [JsonConstructor]
     public InlineSkates(int id, decimal size, string purpose, bool isFunctional, decimal wheelDiameter,
         string bearingType) : base(id, size, purpose, isFunctional)
     {

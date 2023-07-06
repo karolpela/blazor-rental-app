@@ -1,0 +1,47 @@
+[
+  {
+    "Id": 4,
+    "Size": 47,
+    "Purpose": "Figure",
+    "IsFunctional": true,
+    "WheelDiameter": 15,
+    "BearingType": "ABEC-5",
+    "HourlyFee": 5
+  },
+  {
+    "Id": 6,
+    "Size": 47,
+    "Purpose": "Hockey",
+    "IsFunctional": true,
+    "WheelDiameter": 88,
+    "BearingType": "ABEC-9",
+    "HourlyFee": 3
+  },
+  {
+    "Id": 8,
+    "Size": 42,
+    "Purpose": "Performance",
+    "IsFunctional": true,
+    "WheelDiameter": 30,
+    "BearingType": "ABEC-9",
+    "HourlyFee": 4
+  },
+  {
+    "Id": 12,
+    "Size": 41,
+    "Purpose": "Performance",
+    "IsFunctional": true,
+    "WheelDiameter": 38,
+    "BearingType": "ABEC-7",
+    "HourlyFee": 2
+  },
+  {
+    "Id": 18,
+    "Size": 45,
+    "Purpose": "Hockey",
+    "IsFunctional": false,
+    "WheelDiameter": 22,
+    "BearingType": "ABEC-3",
+    "HourlyFee": 2
+  }
+]

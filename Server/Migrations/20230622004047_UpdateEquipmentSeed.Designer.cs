@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using RentalApp.Server.Data;
 
@@ -10,9 +11,11 @@ using RentalApp.Server.Data;
 namespace RentalApp.Server.Migrations
 {
     [DbContext(typeof(RentalAppContext))]
-    partial class RentalAppContextModelSnapshot : ModelSnapshot
+    [Migration("20230622004047_UpdateEquipmentSeed")]
+    partial class UpdateEquipmentSeed
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "7.0.7");
@@ -472,118 +475,6 @@ namespace RentalApp.Server.Migrations
                     b.HasIndex("EquipmentId");
 
                     b.ToTable("Rentals");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            ClientId = 4,
-                            EndDate = new DateTimeOffset(new DateTime(2022, 6, 19, 12, 12, 33, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
-                            EquipmentDamaged = false,
-                            EquipmentId = 11,
-                            ScheduledEndDate = new DateTimeOffset(new DateTime(2022, 6, 19, 12, 12, 33, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
-                            StartDate = new DateTimeOffset(new DateTime(2022, 6, 13, 12, 12, 33, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0))
-                        },
-                        new
-                        {
-                            Id = 2,
-                            ClientId = 1,
-                            EndDate = new DateTimeOffset(new DateTime(2022, 3, 30, 9, 11, 40, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
-                            EquipmentDamaged = true,
-                            EquipmentId = 2,
-                            ScheduledEndDate = new DateTimeOffset(new DateTime(2022, 3, 30, 9, 11, 40, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
-                            StartDate = new DateTimeOffset(new DateTime(2022, 3, 27, 9, 11, 40, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0))
-                        },
-                        new
-                        {
-                            Id = 3,
-                            ClientId = 1,
-                            EndDate = new DateTimeOffset(new DateTime(2022, 9, 10, 10, 43, 38, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
-                            EquipmentDamaged = false,
-                            EquipmentId = 1,
-                            ScheduledEndDate = new DateTimeOffset(new DateTime(2022, 9, 10, 10, 43, 38, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
-                            StartDate = new DateTimeOffset(new DateTime(2022, 9, 10, 10, 43, 38, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0))
-                        },
-                        new
-                        {
-                            Id = 4,
-                            ClientId = 6,
-                            EndDate = new DateTimeOffset(new DateTime(2022, 5, 28, 23, 33, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
-                            EquipmentDamaged = true,
-                            EquipmentId = 10,
-                            ScheduledEndDate = new DateTimeOffset(new DateTime(2022, 5, 27, 23, 33, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
-                            StartDate = new DateTimeOffset(new DateTime(2022, 5, 25, 23, 33, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0))
-                        },
-                        new
-                        {
-                            Id = 5,
-                            ClientId = 1,
-                            EndDate = new DateTimeOffset(new DateTime(2023, 3, 26, 5, 0, 34, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
-                            EquipmentDamaged = false,
-                            EquipmentId = 1,
-                            ScheduledEndDate = new DateTimeOffset(new DateTime(2023, 3, 25, 5, 0, 34, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
-                            StartDate = new DateTimeOffset(new DateTime(2023, 3, 25, 5, 0, 34, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0))
-                        },
-                        new
-                        {
-                            Id = 6,
-                            ClientId = 11,
-                            EndDate = new DateTimeOffset(new DateTime(2023, 6, 3, 7, 55, 37, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
-                            EquipmentDamaged = false,
-                            EquipmentId = 4,
-                            ScheduledEndDate = new DateTimeOffset(new DateTime(2023, 6, 3, 7, 55, 37, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
-                            StartDate = new DateTimeOffset(new DateTime(2023, 6, 2, 7, 55, 37, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0))
-                        },
-                        new
-                        {
-                            Id = 7,
-                            ClientId = 1,
-                            EndDate = new DateTimeOffset(new DateTime(2022, 2, 4, 7, 42, 18, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
-                            EquipmentDamaged = true,
-                            EquipmentId = 12,
-                            ScheduledEndDate = new DateTimeOffset(new DateTime(2022, 2, 4, 7, 42, 18, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
-                            StartDate = new DateTimeOffset(new DateTime(2022, 1, 28, 7, 42, 18, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0))
-                        },
-                        new
-                        {
-                            Id = 8,
-                            ClientId = 2,
-                            EndDate = new DateTimeOffset(new DateTime(2022, 10, 13, 0, 53, 3, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
-                            EquipmentDamaged = true,
-                            EquipmentId = 1,
-                            ScheduledEndDate = new DateTimeOffset(new DateTime(2022, 10, 12, 0, 53, 3, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
-                            StartDate = new DateTimeOffset(new DateTime(2022, 10, 10, 0, 53, 3, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0))
-                        },
-                        new
-                        {
-                            Id = 9,
-                            ClientId = 6,
-                            EndDate = new DateTimeOffset(new DateTime(2022, 6, 14, 18, 53, 37, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
-                            EquipmentDamaged = false,
-                            EquipmentId = 10,
-                            ScheduledEndDate = new DateTimeOffset(new DateTime(2022, 6, 14, 18, 53, 37, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
-                            StartDate = new DateTimeOffset(new DateTime(2022, 6, 10, 18, 53, 37, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0))
-                        },
-                        new
-                        {
-                            Id = 10,
-                            ClientId = 1,
-                            EndDate = new DateTimeOffset(new DateTime(2022, 8, 16, 0, 7, 38, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
-                            EquipmentDamaged = false,
-                            EquipmentId = 9,
-                            ScheduledEndDate = new DateTimeOffset(new DateTime(2022, 8, 16, 0, 7, 38, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
-                            StartDate = new DateTimeOffset(new DateTime(2022, 8, 10, 0, 7, 38, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0))
-                        },
-                        new
-                        {
-                            Id = 11,
-                            ClientId = 4,
-                            EndDate = new DateTimeOffset(new DateTime(2022, 1, 24, 21, 2, 29, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
-                            EquipmentDamaged = false,
-                            EquipmentId = 6,
-                            ScheduledEndDate = new DateTimeOffset(new DateTime(2022, 1, 23, 21, 2, 29, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
-                            StartDate = new DateTimeOffset(new DateTime(2022, 1, 23, 21, 2, 29, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0))
-                        });
                 });
 
             modelBuilder.Entity("RentalApp.Shared.Models.Equipment.Skates.IceSkates", b =>

@@ -1,8 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using RentalApp.Server.Data;
@@ -25,7 +20,8 @@ namespace RentalApp.Server.Controllers
 
         // GET: api/People
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Person>>> GetPeople([FromQuery] string role)
+        public async Task<ActionResult<IEnumerable<Person>>> GetPeople([FromQuery] string? role,
+            [FromQuery] string? sort = "id")
         {
             if (_context.People == null)
             {
@@ -36,21 +32,71 @@ namespace RentalApp.Server.Controllers
 
             if (!string.IsNullOrWhiteSpace(role))
             {
-                var roles = role.Split('+')
-                    .Select(r => Enum.TryParse<PersonRole>(r, true, out var result) ? result : (PersonRole?)null)
-                    .ToList();
-
-                if (roles.Any(r => r == null))
+                var roleFilterResult = ApplyRoleFilter(query, role);
+                if (roleFilterResult.Result is BadRequestObjectResult)
                 {
-                    return BadRequest(new { message = "One or more invalid roles" });
+                    return roleFilterResult.Result;
                 }
 
-                PersonRole? combinedRoles = roles.Aggregate((current, next) => current | next!.Value);
+                query = roleFilterResult.Query ?? query;
+            }
 
-                query = query.Where(p => (p.Role & combinedRoles) == combinedRoles);
+            if (!string.IsNullOrEmpty(sort))
+            {
+                var sortResult = ApplySort(query, sort);
+                if (sortResult.Result is BadRequestObjectResult)
+                {
+                    return sortResult.Result;
+                }
+
+                query = sortResult.Query ?? query;
             }
 
             return await query.ToListAsync();
+        }
+
+        private (IQueryable<Person>? Query, ActionResult? Result) ApplyRoleFilter(IQueryable<Person> query, string role)
+        {
+            var roles = role.Split('+')
+                .Select(r => Enum.TryParse<PersonRole>(r, true, out var result) ? result : (PersonRole?)null)
+                .ToList();
+
+            if (roles.Any(r => r == null))
+            {
+                return (null, BadRequest(new { message = "One or more invalid roles" }));
+            }
+
+            PersonRole? combinedRoles = roles.Aggregate((current, next) => current | next!.Value);
+
+            query = query.Where(p => (p.Role & combinedRoles) == combinedRoles);
+
+            return (query, null);
+        }
+
+        private (IQueryable<Person>? Query, ActionResult? Result) ApplySort(IQueryable<Person> query, string sort)
+        {
+            switch (sort.ToLower())
+            {
+                case "id":
+                    query = query.OrderBy(p => p.Id);
+                    break;
+                case "firstname":
+                    query = query.OrderBy(p => p.FirstName);
+                    break;
+                case "lastname":
+                    query = query.OrderBy(p => p.LastName);
+                    break;
+                case "role":
+                    query = query.OrderBy(p => p.Role);
+                    break;
+                case "phonenumber":
+                    query = query.OrderBy(p => p.PhoneNumber);
+                    break;
+                default:
+                    return (null, BadRequest(new { message = "Invalid sort parameter" }));
+            }
+
+            return (query, null);
         }
 
         // GET: api/People/5

@@ -11,12 +11,11 @@ namespace RentalApp.Client.Pages;
 
 public partial class RegisterClient
 {
-    private Person client = new Person(PersonRole.Client, string.Empty, string.Empty);
-    
-    private RadzenTemplateForm<Person>? form;
-    
     private string? badNumber;
-    
+    private readonly Person client = new(PersonRole.Client, string.Empty, string.Empty);
+
+    private RadzenTemplateForm<Person>? form;
+
     [Inject] protected IJSRuntime JSRuntime { get; set; } = default!;
 
     [Inject] protected NavigationManager NavigationManager { get; set; } = default!;
@@ -25,30 +24,23 @@ public partial class RegisterClient
 
     [Inject] protected HttpClient Http { get; set; } = default!;
 
-    private async Task AddClient()
+    private async Task AddClientAsync()
     {
         var response = await Http.PostAsJsonAsync("api/People", client);
         if (response.IsSuccessStatusCode)
         {
             var returnToDashboard = await DialogService.Alert("Client registered!", "Success",
                 new AlertOptions { OkButtonText = "Return" });
-            if (returnToDashboard ?? false)
-            {
-                NavigationManager.NavigateTo("/");
-            }
+            if (returnToDashboard ?? false) NavigationManager.NavigateTo("/");
         }
         else
         {
             var error = await response.Content.ReadFromJsonAsync<ErrorResponse>();
             if (error?.Message == "PhoneNumberNotUnique")
-            {
                 badNumber = client.PhoneNumber!;
-            }
             else
-            {
                 await DialogService.Alert(error?.Message, "Error",
                     new AlertOptions { OkButtonText = "OK" });
-            }
         }
     }
 }

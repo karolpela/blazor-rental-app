@@ -2,12 +2,14 @@
 @using RentalApp.Shared.Models
 
 <PageTitle>RegisterClient</PageTitle>
-<RadzenRow>
-    <RadzenColumn Size="12">
-        <RadzenText Text="Register Client" TextStyle="TextStyle.H3" TagName="TagName.H1"/>
-    </RadzenColumn>
-</RadzenRow>
-<RadzenCard Style="height: 80%; margin: 20px; max-height: 600px; width: 80%; max-width: 800px">
+
+<RadzenCard
+    Style="height: 80%; margin: 20px; max-height: 600px; width: 80%; max-width: 800px; background: #f2f3f5; border: solid thin lightgrey">
+    <RadzenRow>
+        <RadzenColumn Size="12">
+            <RadzenText Text="Register new client" TextStyle="TextStyle.H3" TagName="TagName.H1"/>
+        </RadzenColumn>
+    </RadzenRow>
     @if (client == null)
     {
         <p>
@@ -17,7 +19,7 @@
     else
     {
         <RadzenTemplateForm @ref="form" TItem="Person" Data="@client" Style="padding: 80px">
-            <RadzenRow style="margin-bottom: 1rem">
+            <RadzenRow Style="margin-bottom: 1rem" AlignItems="AlignItems.Center">
                 <RadzenColumn SizeMD="2">
                     <RadzenLabel Text="First Name" Component="FirstName" style="width: 100%"/>
                 </RadzenColumn>
@@ -26,7 +28,7 @@
                     <RadzenRegexValidator Pattern="([a-zA-Z]+)" Component="FirstName" Text="Not a valid first name" Style="display: block"></RadzenRegexValidator>
                 </RadzenColumn>
             </RadzenRow>
-            <RadzenRow style="margin-bottom: 1rem">
+            <RadzenRow Style="margin-bottom: 1rem" AlignItems="AlignItems.Center">
                 <RadzenColumn SizeMD="2">
                     <RadzenLabel Text="Last Name" Component="LastName" style="width: 100%"/>
                 </RadzenColumn>
@@ -35,7 +37,7 @@
                     <RadzenRegexValidator Pattern="([a-zA-Z]+)" Component="LastName" Text="Not a valid last name" Style="display: block"></RadzenRegexValidator>
                 </RadzenColumn>
             </RadzenRow>
-            <RadzenRow style="margin-bottom: 1rem">
+            <RadzenRow Style="margin-bottom: 1rem" AlignItems="AlignItems.Center">
                 <RadzenColumn SizeMD="2">
                     <RadzenLabel Text="Phone no." Component="PhoneNo" style="width: 100%"/>
                 </RadzenColumn>
@@ -46,7 +48,7 @@
                 </RadzenColumn>
             </RadzenRow>
             <RadzenStack Orientation="Orientation.Horizontal" AlignItems="AlignItems.Start" JustifyContent="JustifyContent.Center" Reverse="false" Style="margin-top: 40px">
-                <RadzenButton Disabled="@(!form?.IsValid ?? true)" ButtonStyle="ButtonStyle.Success" ButtonType="ButtonType.Submit" Icon="done" Text="Register" Variant="Variant.Filled" Click="AddClient"/>
+                <RadzenButton Disabled="@(!form?.IsValid ?? true)" ButtonStyle="ButtonStyle.Success" ButtonType="ButtonType.Submit" Icon="done" Text="Register" Variant="Variant.Filled" Click="AddClientAsync"/>
             </RadzenStack>
         </RadzenTemplateForm>
     }
