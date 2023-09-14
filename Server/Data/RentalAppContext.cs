@@ -45,7 +45,7 @@ public class RentalAppContext : DbContext
     private void CalculateInsuranceCosts()
     {
         var entitiesToCalculate = ChangeTracker.Entries<Insurance>()
-            .Where(e => e.State == EntityState.Added || e.State == EntityState.Modified)
+            .Where(e => e.State is EntityState.Added or EntityState.Modified)
             .Select(e => e.Entity);
 
         foreach (var insurance in entitiesToCalculate) insurance.CalculateCost();

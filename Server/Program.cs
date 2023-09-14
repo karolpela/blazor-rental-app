@@ -33,9 +33,6 @@ using (var scope = app.Services.CreateScope())
     var context = services.GetRequiredService<RentalAppContext>();
 
     context.Database.Migrate();
-    //
-    // var script = File.ReadAllText(Path.Combine("seedRental.sql"));
-    // context.Database.ExecuteSqlRaw(script);
 }
 
 // Configure the HTTP request pipeline.
