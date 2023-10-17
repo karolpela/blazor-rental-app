@@ -1,16 +1,17 @@
 @inherits LayoutComponentBase
 
+
 <PageTitle>Rental App</PageTitle>
 
 <ErrorBoundary>
     <ChildContent>
-        <div style="flex-direction: unset">
-            <RadzenMenu  class="rz-shadow-1" Style="border-bottom-left-radius: var(--rz-card-border-radius); border-bottom-right-radius: var(--rz-card-border-radius)">
-                <RadzenMenuItem  Match="NavLinkMatch.All"  Text="Active Rentals" Path="active-rentals" Icon="list"></RadzenMenuItem>
+            <RadzenMenu class="rz-shadow-1" id="nav-menu"
+                        Style="border-bottom-left-radius: var(--rz-card-border-radius);
+                         border-bottom-right-radius: var(--rz-card-border-radius); z-index: 1">
+                <RadzenMenuItem Match="NavLinkMatch.All" Text="Active Rentals" Path="active-rentals" Icon="list"></RadzenMenuItem>
                 <RadzenMenuItem Text="Register Client" Path="register-client" Icon="how_to_reg"></RadzenMenuItem>
                 <RadzenMenuItem Text="New Rental" Path="new-rental" Icon="add"></RadzenMenuItem>
             </RadzenMenu>
-        </div>
         @Body
     </ChildContent>
     <ErrorContent Context="ex">

@@ -3,6 +3,13 @@ html, body {
     height: 100%;
 }
 
+ul#nav-menu {
+    @media (max-width: 768px) {
+        position: absolute;
+        align-self: flex-start;
+    }
+}
+
 .rz-card.bg-card {
     margin: auto;
 }
