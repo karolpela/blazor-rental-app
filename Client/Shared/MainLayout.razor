@@ -4,9 +4,14 @@
 
 <ErrorBoundary>
     <ChildContent>
-        <div class="center">
-            @Body
+        <div style="flex-direction: unset">
+            <RadzenMenu  class="rz-shadow-1" Style="border-bottom-left-radius: var(--rz-card-border-radius); border-bottom-right-radius: var(--rz-card-border-radius)">
+                <RadzenMenuItem  Match="NavLinkMatch.All"  Text="Active Rentals" Path="active-rentals" Icon="list"></RadzenMenuItem>
+                <RadzenMenuItem Text="Register Client" Path="register-client" Icon="how_to_reg"></RadzenMenuItem>
+                <RadzenMenuItem Text="New Rental" Path="new-rental" Icon="add"></RadzenMenuItem>
+            </RadzenMenu>
         </div>
+        @Body
     </ChildContent>
     <ErrorContent Context="ex">
         <p class="error">@ex.Message</p>

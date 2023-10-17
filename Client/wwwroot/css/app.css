@@ -1,33 +1,27 @@
-body {
-    --body-font: Segoe UI, sans-serif;
-    font-family: var(--body-font);
-    font-size: var(--type-ramp-base-font-size);
-    line-height: var(--type-ramp-base-line-height);
-    margin: 0;
+html, body {
     width: 100%;
-    color: #3e3e3e;
-}
-
-body, html {
     height: 100%;
-    margin: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
 }
 
-h1 {
-    display: flex;
-    align-items: center;
-    justify-content: center;
+.rz-card.bg-card {
+    margin: auto;
 }
 
-.center {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+.card-heading {
+    padding: 0 1rem 1rem;
 }
+
+.rz-menu:not(.rz-profile-menu) .rz-navigation-item-link.active {
+    font-weight: bold;
+}
+
+/*Remove stripes from Active Rentals table*/
+.rental-table {
+    --rz-grid-header-background-color: var(--rz-card-background);
+    --rz-grid-stripe-background-color: var(--rz-card-background);
+}
+
+/*--Default Blazor WASM app.css--*/
 
 #blazor-error-ui {
     background: lightyellow;
@@ -39,7 +33,6 @@ h1 {
     position: fixed;
     width: 100%;
     z-index: 1000;
-    margin: 20px 0;
 }
 
 #blazor-error-ui .dismiss {
@@ -55,8 +48,8 @@ h1 {
     color: white;
 }
 
-.blazor-error-boundary::before {
-    content: "An error has occurred. "
+.blazor-error-boundary::after {
+    content: "An error has occurred."
 }
 
 .loading-progress {
@@ -75,6 +68,7 @@ h1 {
     transform: rotate(-90deg);
 }
 
+/*noinspection CssUnresolvedCustomProperty*/
 .loading-progress circle:last-child {
     stroke: #1b6ec2;
     stroke-dasharray: calc(3.141 * var(--blazor-load-percentage, 0%) * 0.8), 500%;
@@ -88,14 +82,7 @@ h1 {
     inset: calc(20vh + 3.25rem) 0 auto 0.2rem;
 }
 
+/*noinspection CssUnresolvedCustomProperty*/
 .loading-progress-text:after {
     content: var(--blazor-load-percentage-text, "Loading");
-}
-
-.prompt {
-
-    position: relative;
-    padding: 1rem 1rem;
-
-    border: 1px solid transparent;
 }

@@ -15,13 +15,6 @@ namespace RentalApp.Client.Pages;
 
 public partial class NewRental
 {
-    private bool _insuranceWanted;
-    private string? _pesel;
-
-    private IEnumerable<Person>? clients;
-
-    private IEnumerable<SportsEquipment>? equipment;
-
     private readonly Dictionary<string, decimal> gearPerDay = new()
     {
         { "Helmet", 10m },
@@ -30,9 +23,6 @@ public partial class NewRental
     };
 
     private readonly Insurance insurance = new();
-    private bool peselInSystem;
-
-    private IEnumerable<ProtectiveGear>? protectiveGear;
 
     private readonly Rental rental = new(
         DateTimeOffset.MinValue,
@@ -40,9 +30,18 @@ public partial class NewRental
         null,
         false);
 
-    private IEnumerable<int> selectedGear = Array.Empty<int>();
-
     private readonly JsonSerializerOptions serializerOptions = new();
+    private bool _insuranceWanted;
+    private string? _pesel;
+
+    private IEnumerable<Person>? clients;
+
+    private IEnumerable<SportsEquipment>? equipment;
+    private bool peselInSystem;
+
+    private IEnumerable<ProtectiveGear>? protectiveGear;
+
+    private IEnumerable<int> selectedGear = Array.Empty<int>();
 
     private RadzenTemplateForm<Rental>? templateForm;
     [Inject] protected IJSRuntime JSRuntime { get; set; } = default!;
@@ -105,7 +104,6 @@ public partial class NewRental
     private decimal? TotalRentalCost => TotalEquipmentCost + TotalInsuranceCost + TotalGearCost;
 
     protected override async Task OnInitializedAsync()
-
     {
         serializerOptions.Converters.Add(new SportsEquipmentConverter());
 

@@ -4,13 +4,10 @@
 @using RentalApp.Shared.Models.Equipment
 @using System.Text.RegularExpressions
 
-<PageTitle>New Rental</PageTitle>
+<PageTitle>New rental</PageTitle>
 
-<br/>
-<RadzenCard Style="width: 80%; max-width: 800px; background: #f2f3f5; border: solid thin lightgrey">
-<RadzenRow JustifyContent="JustifyContent.Center">
-    <RadzenText Text="New rental" TextStyle="TextStyle.H3" TagName="TagName.H1"/>
-</RadzenRow>
+<RadzenCard class="bg-card" Style="max-width: 700px; width: 100%">
+<RadzenText Text="New rental" TextAlign="TextAlign.Center" TextStyle="TextStyle.H3" TagName="TagName.H1"/>
 <RadzenTemplateForm TItem="Rental" @ref="templateForm" Data="@rental">
 <RadzenStack Gap="1rem">
 <RadzenFieldset Text="Rental">
@@ -19,14 +16,14 @@
             <RadzenColumn>
                 <RadzenStack Gap="1.25rem">
                     <RadzenRow AlignItems="AlignItems.Center">
-                        <RadzenColumn Size="12" SizeMD="3">
-                            <RadzenLabel Text="Client" Component="ClientId" style="width: 100%"/>
+                        <RadzenColumn Size="12" SizeMD="4">
+                            <RadzenLabel Text="Client" Component="ClientId"/>
                         </RadzenColumn>
-                        <RadzenColumn Size="12" SizeMD="9">
+                        <RadzenColumn Size="12" SizeMD="8">
                             <RadzenDropDown
                                 @bind-Value="rental.Client" TValue="Person"
                                 AllowClear="false" Placeholder="Select client" Data="@clients"
-                                Style="width: 100%;" TextProperty="FirstName" Name="ClientId"
+                                Style="width: 100%" TextProperty="FirstName" Name="ClientId"
                                 AllowFiltering="true" FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive"
                                 Change="@(() => { peselInSystem = !rental.Client.Pesel?.IsNullOrEmpty() ?? false; Pesel = rental.Client.Pesel; templateForm!.EditContext.Validate();})">
                                 <Template Context="clientContext">
@@ -39,14 +36,14 @@
                         </RadzenColumn>
                     </RadzenRow>
                     <RadzenRow AlignItems="AlignItems.Center">
-                        <RadzenColumn Size="12" SizeMD="3">
+                        <RadzenColumn Size="12" SizeMD="4">
                             <RadzenLabel Text="Equipment" Component="EquipmentId"/>
                         </RadzenColumn>
-                        <RadzenColumn Size="12" SizeMD="9">
+                        <RadzenColumn Size="12" SizeMD="8">
                             <RadzenDropDown
                                 @bind-Value="rental.Equipment" TValue="SportsEquipment"
                                 AllowClear="false" Placeholder="Select equipment"
-                                Data="@equipment" Style="width: 100%;" TextProperty="Purpose"
+                                Data="@equipment" Style="width: 100%" TextProperty="Purpose"
                                 Name="EquipmentId" AllowFiltering="true"
                                 FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive"
                                 Change="@(() => templateForm!.EditContext.Validate())">
@@ -86,7 +83,7 @@
                                 Style="width: 100%" @bind-Value="rental.ScheduledEndDate" Name="EndDate"
                                 ShowTime="true" ShowSeconds="false"
                                 HourFormat="24" DateFormat="yyyy-MM-dd    HH:mm"/>
-                            <RadzenCustomValidator Text="End date has to be greater than start date" Component="ScheduledEndDate" Validator="@(() => rental.ScheduledEndDate > rental.StartDate)" Style="display: block"></RadzenCustomValidator>
+                            <RadzenCustomValidator Text="End date has to be greater than start date" Component="EndDate" Validator="@(() => rental.ScheduledEndDate > rental.StartDate)" Style="display: block"></RadzenCustomValidator>
                         </RadzenColumn>
                     </RadzenRow>
                 </RadzenStack>
@@ -139,12 +136,12 @@
                             Style="width: 100%">
                         </RadzenTextBox>
                         <RadzenCustomValidator
-                            Text="Insurance requires a PESEL no." Component="PeselInput"
+                            Text="Insurance requires a PESEL no." Component="Pesel"
                             Validator="@(() => !InsuranceWanted || !Pesel.IsNullOrEmpty())"
                             Style="display: block; position: absolute">
                         </RadzenCustomValidator>
                         <RadzenCustomValidator
-                            Text="Not a valid PESEL no." Component="PeselInput"
+                            Text="Not a valid PESEL no." Component="Pesel"
                             Validator="@(() => Pesel == null || Regex.IsMatch(Pesel, @"^\d{11}$"))"
                             Style="display: block; position: absolute">
                         </RadzenCustomValidator>

@@ -9,14 +9,14 @@ namespace RentalApp.Client.Pages;
 
 public partial class ActiveRentals
 {
-    protected IEnumerable<Rental> rentals;
-
-    protected int rentalsCount;
-
     private readonly JsonSerializerOptions serializerOptions = new()
     {
         PropertyNameCaseInsensitive = true
     };
+
+    protected IEnumerable<Rental> rentals = Array.Empty<Rental>();
+
+    protected int rentalsCount;
 
     [Inject] protected IJSRuntime JSRuntime { get; set; } = default!;
 
@@ -46,7 +46,6 @@ public partial class ActiveRentals
 
         var rentalsResponse = await Http.GetAsync("api/Rentals?activeOnly=true");
         var rentalsJson = await rentalsResponse.Content.ReadAsStringAsync();
-        rentals = JsonSerializer.Deserialize<IEnumerable<Rental>>(rentalsJson, serializerOptions) ??
-                  Array.Empty<Rental>();
+        rentals = JsonSerializer.Deserialize<IEnumerable<Rental>>(rentalsJson, serializerOptions) ?? rentals;
     }
 }

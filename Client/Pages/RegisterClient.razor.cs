@@ -11,8 +11,8 @@ namespace RentalApp.Client.Pages;
 
 public partial class RegisterClient
 {
-    private string? badNumber;
     private readonly Person client = new(PersonRole.Client, string.Empty, string.Empty);
+    private string? badNumber;
 
     private RadzenTemplateForm<Person>? form;
 
