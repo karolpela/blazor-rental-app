@@ -21,7 +21,7 @@ public class Person
     }
 
     public int Id { get; set; }
-    public PersonRole Role { get; set; } // TODO server-side validation?
+    public PersonRole Role { get; set; }
     public string FirstName { get; set; }
     public string LastName { get; set; }
     public string? Pesel { get; set; }
@@ -47,7 +47,6 @@ public class Person
     // Employee only methods
     private decimal CalculateSalary()
     {
-        // TODO: Implement
         return 0;
     }
 

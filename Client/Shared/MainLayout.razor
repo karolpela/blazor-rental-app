@@ -5,13 +5,13 @@
 
 <ErrorBoundary>
     <ChildContent>
-            <RadzenMenu class="rz-shadow-1" id="nav-menu"
-                        Style="border-bottom-left-radius: var(--rz-card-border-radius);
-                         border-bottom-right-radius: var(--rz-card-border-radius); z-index: 1">
-                <RadzenMenuItem Match="NavLinkMatch.All" Text="Active Rentals" Path="active-rentals" Icon="list"></RadzenMenuItem>
-                <RadzenMenuItem Text="Register Client" Path="register-client" Icon="how_to_reg"></RadzenMenuItem>
-                <RadzenMenuItem Text="New Rental" Path="new-rental" Icon="add"></RadzenMenuItem>
-            </RadzenMenu>
+        <RadzenMenu class="rz-shadow-1" id="nav-menu"
+                    Style="border-bottom-left-radius: var(--rz-card-border-radius);
+                         border-bottom-right-radius: var(--rz-card-border-radius); z-index: 10">
+            <RadzenMenuItem Match="NavLinkMatch.All" Text="Active Rentals" Path="active-rentals" Icon="list"></RadzenMenuItem>
+            <RadzenMenuItem Text="Register Client" Path="register-client" Icon="how_to_reg"></RadzenMenuItem>
+            <RadzenMenuItem Text="New Rental" Path="new-rental" Icon="add"></RadzenMenuItem>
+        </RadzenMenu>
         @Body
     </ChildContent>
     <ErrorContent Context="ex">
@@ -19,4 +19,4 @@
     </ErrorContent>
 </ErrorBoundary>
 
-<RadzenDialog/>
+<RadzenComponents/>

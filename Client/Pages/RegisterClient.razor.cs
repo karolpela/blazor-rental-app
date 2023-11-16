@@ -5,8 +5,6 @@ using Radzen;
 using Radzen.Blazor;
 using RentalApp.Shared.Models;
 
-// ReSharper disable InconsistentNaming
-
 namespace RentalApp.Client.Pages;
 
 public partial class RegisterClient

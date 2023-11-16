@@ -1,152 +1,152 @@
 [
   {
-    "Id": 1,
-    "Type": "KneePads",
-    "Size": "M"
+    "id": 1,
+    "type": "KneePads",
+    "size": "M"
   },
   {
-    "Id": 2,
-    "Type": "KneePads",
-    "Size": "XXL"
+    "id": 2,
+    "type": "KneePads",
+    "size": "XXL"
   },
   {
-    "Id": 3,
-    "Type": "Helmet",
-    "Size": "L"
+    "id": 3,
+    "type": "Helmet",
+    "size": "L"
   },
   {
-    "Id": 4,
-    "Type": "Helmet",
-    "Size": "XL"
+    "id": 4,
+    "type": "Helmet",
+    "size": "XL"
   },
   {
-    "Id": 5,
-    "Type": "Helmet",
-    "Size": "M"
+    "id": 5,
+    "type": "Helmet",
+    "size": "M"
   },
   {
-    "Id": 6,
-    "Type": "Gloves",
-    "Size": "XXL"
+    "id": 6,
+    "type": "Gloves",
+    "size": "XXL"
   },
   {
-    "Id": 7,
-    "Type": "KneePads",
-    "Size": "S"
+    "id": 7,
+    "type": "KneePads",
+    "size": "S"
   },
   {
-    "Id": 8,
-    "Type": "Gloves",
-    "Size": "L"
+    "id": 8,
+    "type": "Gloves",
+    "size": "L"
   },
   {
-    "Id": 9,
-    "Type": "Gloves",
-    "Size": "XXL"
+    "id": 9,
+    "type": "Gloves",
+    "size": "XXL"
   },
   {
-    "Id": 10,
-    "Type": "KneePads",
-    "Size": "XL"
+    "id": 10,
+    "type": "KneePads",
+    "size": "XL"
   },
   {
-    "Id": 11,
-    "Type": "Gloves",
-    "Size": "L"
+    "id": 11,
+    "type": "Gloves",
+    "size": "L"
   },
   {
-    "Id": 12,
-    "Type": "Gloves",
-    "Size": "XL"
+    "id": 12,
+    "type": "Gloves",
+    "size": "XL"
   },
   {
-    "Id": 13,
-    "Type": "Gloves",
-    "Size": "M"
+    "id": 13,
+    "type": "Gloves",
+    "size": "M"
   },
   {
-    "Id": 14,
-    "Type": "KneePads",
-    "Size": "M"
+    "id": 14,
+    "type": "KneePads",
+    "size": "M"
   },
   {
-    "Id": 15,
-    "Type": "Helmet",
-    "Size": "XXL"
+    "id": 15,
+    "type": "Helmet",
+    "size": "XXL"
   },
   {
-    "Id": 16,
-    "Type": "KneePads",
-    "Size": "XXL"
+    "id": 16,
+    "type": "KneePads",
+    "size": "XXL"
   },
   {
-    "Id": 17,
-    "Type": "Helmet",
-    "Size": "M"
+    "id": 17,
+    "type": "Helmet",
+    "size": "M"
   },
   {
-    "Id": 18,
-    "Type": "KneePads",
-    "Size": "M"
+    "id": 18,
+    "type": "KneePads",
+    "size": "M"
   },
   {
-    "Id": 19,
-    "Type": "Helmet",
-    "Size": "M"
+    "id": 19,
+    "type": "Helmet",
+    "size": "M"
   },
   {
-    "Id": 20,
-    "Type": "Gloves",
-    "Size": "L"
+    "id": 20,
+    "type": "Gloves",
+    "size": "L"
   },
   {
-    "Id": 21,
-    "Type": "Gloves",
-    "Size": "XXL"
+    "id": 21,
+    "type": "Gloves",
+    "size": "XXL"
   },
   {
-    "Id": 22,
-    "Type": "KneePads",
-    "Size": "XXL"
+    "id": 22,
+    "type": "KneePads",
+    "size": "XXL"
   },
   {
-    "Id": 23,
-    "Type": "Helmet",
-    "Size": "M"
+    "id": 23,
+    "type": "Helmet",
+    "size": "M"
   },
   {
-    "Id": 24,
-    "Type": "Gloves",
-    "Size": "M"
+    "id": 24,
+    "type": "Gloves",
+    "size": "M"
   },
   {
-    "Id": 25,
-    "Type": "Gloves",
-    "Size": "L"
+    "id": 25,
+    "type": "Gloves",
+    "size": "L"
   },
   {
-    "Id": 26,
-    "Type": "Helmet",
-    "Size": "XXL"
+    "id": 26,
+    "type": "Helmet",
+    "size": "XXL"
   },
   {
-    "Id": 27,
-    "Type": "Gloves",
-    "Size": "XXL"
+    "id": 27,
+    "type": "Gloves",
+    "size": "XXL"
   },
   {
-    "Id": 28,
-    "Type": "Helmet",
-    "Size": "XL"
+    "id": 28,
+    "type": "Helmet",
+    "size": "XL"
   },
   {
-    "Id": 29,
-    "Type": "Gloves",
-    "Size": "S"
+    "id": 29,
+    "type": "Gloves",
+    "size": "S"
   },
   {
-    "Id": 30,
-    "Type": "Gloves",
-    "Size": "S"
+    "id": 30,
+    "type": "Gloves",
+    "size": "S"
   }
 ]

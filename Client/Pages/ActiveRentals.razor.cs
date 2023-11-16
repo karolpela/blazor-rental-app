@@ -1,22 +1,22 @@
+using System.Net.Http.Json;
 using System.Text.Json;
 using Microsoft.AspNetCore.Components;
+using Microsoft.Extensions.Options;
 using Microsoft.JSInterop;
 using Radzen;
-using RentalApp.Shared.Converters;
+using Radzen.Blazor;
 using RentalApp.Shared.Models;
 
 namespace RentalApp.Client.Pages;
 
 public partial class ActiveRentals
 {
-    private readonly JsonSerializerOptions serializerOptions = new()
-    {
-        PropertyNameCaseInsensitive = true
-    };
+    private RadzenDataGrid<Rental>? dataGrid;
+    private Rental[]? rentals;
 
-    protected IEnumerable<Rental> rentals = Array.Empty<Rental>();
+    protected int RentalsCount;
 
-    protected int rentalsCount;
+    [Inject] protected IOptions<JsonSerializerOptions> JsonOptions { get; set; } = default!;
 
     [Inject] protected IJSRuntime JSRuntime { get; set; } = default!;
 
@@ -26,11 +26,11 @@ public partial class ActiveRentals
 
     [Inject] protected HttpClient Http { get; set; } = default!;
 
-    private void rentalsLoadData()
+    private void RentalsLoadData()
     {
         try
         {
-            rentalsCount = rentals.Count();
+            RentalsCount = rentals?.Length ?? 0;
         }
         catch (Exception)
         {
@@ -39,13 +39,30 @@ public partial class ActiveRentals
         }
     }
 
+    private async Task EndRental(Rental rental, bool damaged)
+    {
+        rental.EndDate = DateTimeOffset.Now;
+        rental.EquipmentDamaged = damaged;
+        try
+        {
+            await Http.PutAsJsonAsync($"api/Rentals/{rental.Id}", rental);
+            NotificationService.Notify(new NotificationMessage
+                { Severity = NotificationSeverity.Success, Summary = "Success", Detail = "Rental successfully ended" });
+
+            // Fetch new data from server
+            await OnInitializedAsync();
+            dataGrid?.Reload();
+        }
+        catch (Exception)
+        {
+            NotificationService.Notify(new NotificationMessage
+                { Severity = NotificationSeverity.Error, Summary = "Error", Detail = "Unable to end" });
+        }
+    }
 
     protected override async Task OnInitializedAsync()
     {
-        serializerOptions.Converters.Add(new SportsEquipmentConverter());
-
-        var rentalsResponse = await Http.GetAsync("api/Rentals?activeOnly=true");
-        var rentalsJson = await rentalsResponse.Content.ReadAsStringAsync();
-        rentals = JsonSerializer.Deserialize<IEnumerable<Rental>>(rentalsJson, serializerOptions) ?? rentals;
+        rentals = await Http.GetFromJsonAsync<Rental[]>("api/Rentals?activeOnly=true", JsonOptions.Value);
+        ;
     }
 }

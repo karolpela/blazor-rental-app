@@ -1,253 +1,261 @@
 [
   {
-    "Id": 1,
-    "Client": {
-      "Id": 4,
-      "Role": 1,
-      "FirstName": "Aubrey",
-      "LastName": "Hurworth",
-      "PhoneNumber": "190684116"
+    "id": 1,
+    "client": {
+      "id": 4,
+      "role": 1,
+      "firstName": "Aubrey",
+      "lastName": "Hurworth",
+      "phoneNumber": "190684116"
     },
-    "Equipment": {
-      "Id": 11,
-      "Size": 47,
-      "Purpose": "Hockey",
-      "IsFunctional": false,
-      "Discriminator": "InlineSkates",
-      "WheelDiameter": 22,
-      "BearingType": "ABEC-3"
+    "equipment": {
+      "id": 11,
+      "size": 47,
+      "purpose": "Hockey",
+      "isFunctional": false,
+      "bladeMaterial": "Steel",
+      "hasToePick": false,
+      "hourlyFee": 4,
+      "discriminator": "IceSkates"
     },
-    "StartDate": "2022-06-13T12:12:33Z",
-    "ScheduledEndDate": "2022-06-19T12:12:33Z",
-    "EndDate": "2022-06-19T12:12:33Z",
-    "EquipmentDamaged": false
+    "startDate": "2022-06-13T12:12:33Z",
+    "scheduledEndDate": "2022-06-19T12:12:33Z",
+    "equipmentDamaged": false
   },
   {
-    "Id": 2,
-    "Client": {
-      "Id": 1,
-      "Role": 1,
-      "FirstName": "Aubrey",
-      "LastName": "Hurworth",
-      "PhoneNumber": "190684116"
+    "id": 2,
+    "client": {
+      "id": 1,
+      "role": 1,
+      "firstName": "Aubrey",
+      "lastName": "Hurworth",
+      "phoneNumber": "190684116"
     },
-    "Equipment": {
-      "Id": 2,
-      "Size": 46,
-      "Purpose": "Figure Skating",
-      "IsFunctional": false,
-      "Discriminator": "RollerSkates",
-      "WheelHardness": 75
+    "equipment": {
+      "id": 2,
+      "size": 46,
+      "purpose": "Figure",
+      "isFunctional": false,
+      "wheelHardness": 75,
+      "hourlyFee": 2,
+      "discriminator": "RollerSkates"
     },
-    "StartDate": "2022-03-27T09:11:40Z",
-    "ScheduledEndDate": "2022-03-30T09:11:40Z",
-    "EndDate": "2022-03-30T09:11:40Z",
-    "EquipmentDamaged": true
+    "startDate": "2022-03-27T09:11:40Z",
+    "scheduledEndDate": "2022-03-30T09:11:40Z",
+    "endDate": "2022-03-30T09:11:40Z",
+    "equipmentDamaged": true
   },
   {
-    "Id": 3,
-    "Client": {
-      "Id": 1,
-      "Role": 1,
-      "FirstName": "Aubrey",
-      "LastName": "Hurworth",
-      "PhoneNumber": "190684116"
+    "id": 3,
+    "client": {
+      "id": 1,
+      "role": 1,
+      "firstName": "Aubrey",
+      "lastName": "Hurworth",
+      "phoneNumber": "190684116"
     },
-    "Equipment": {
-      "Id": 1,
-      "Size": 44,
-      "Purpose": "Speed Skating",
-      "IsFunctional": true,
-      "Discriminator": "RollerSkates",
-      "WheelHardness": 36
+    "equipment": {
+      "id": 1,
+      "size": 44,
+      "purpose": "Performance",
+      "isFunctional": true,
+      "wheelHardness": 36,
+      "hourlyFee": 3,
+      "discriminator": "RollerSkates"
     },
-    "StartDate": "2022-09-10T10:43:38Z",
-    "ScheduledEndDate": "2022-09-10T10:43:38Z",
-    "EndDate": "2022-09-10T10:43:38Z",
-    "EquipmentDamaged": false
+    "startDate": "2022-09-10T10:43:38Z",
+    "scheduledEndDate": "2022-09-10T10:43:38Z",
+    "endDate": "2022-09-10T10:43:38Z",
+    "equipmentDamaged": false
   },
   {
-    "Id": 4,
-    "Client": {
-      "Id": 6,
-      "Role": 1,
-      "FirstName": "Hermina",
-      "LastName": "Edgley",
-      "PhoneNumber": "882627905"
+    "id": 4,
+    "client": {
+      "id": 6,
+      "role": 1,
+      "firstName": "Hermina",
+      "lastName": "Edgley",
+      "phoneNumber": "882627905"
     },
-    "Equipment": {
-      "Id": 10,
-      "Size": 43,
-      "Purpose": "Hockey",
-      "IsFunctional": false,
-      "Discriminator": "IceSkates",
-      "BladeMaterial": "Carbon Fiber",
-      "HasToePick": true
+    "equipment": {
+      "id": 10,
+      "size": 43,
+      "purpose": "Hockey",
+      "isFunctional": false,
+      "bladeMaterial": "Carbon Fiber",
+      "hasToePick": true,
+      "hourlyFee": 5,
+      "discriminator": "IceSkates"
     },
-    "StartDate": "2022-05-25T23:33:00Z",
-    "ScheduledEndDate": "2022-05-27T23:33:00Z",
-    "EndDate": "2022-05-28T23:33:00Z",
-    "EquipmentDamaged": true
+    "startDate": "2022-05-25T23:33:00Z",
+    "scheduledEndDate": "2022-05-27T23:33:00Z",
+    "endDate": "2022-05-28T23:33:00Z",
+    "equipmentDamaged": true
   },
   {
-    "Id": 5,
-    "Client": {
-      "Id": 1,
-      "Role": 1,
-      "FirstName": "Aubrey",
-      "LastName": "Hurworth",
-      "PhoneNumber": "190684116"
+    "id": 5,
+    "client": {
+      "id": 1,
+      "role": 1,
+      "firstName": "Aubrey",
+      "lastName": "Hurworth",
+      "phoneNumber": "190684116"
     },
-    "Equipment": {
-      "Id": 1,
-      "Size": 44,
-      "Purpose": "Speed Skating",
-      "IsFunctional": true,
-      "Discriminator": "RollerSkates",
-      "WheelHardness": 36
+    "equipment": {
+      "id": 1,
+      "size": 44,
+      "purpose": "Performance",
+      "isFunctional": true,
+      "wheelHardness": 36,
+      "hourlyFee": 3,
+      "discriminator": "RollerSkates"
     },
-    "StartDate": "2023-03-25T05:00:34Z",
-    "ScheduledEndDate": "2023-03-25T05:00:34Z",
-    "EndDate": "2023-03-26T05:00:34Z",
-    "EquipmentDamaged": false
+    "startDate": "2023-03-25T05:00:34Z",
+    "scheduledEndDate": "2023-03-25T05:00:34Z",
+    "endDate": "2023-03-26T05:00:34Z",
+    "equipmentDamaged": false
   },
   {
-    "Id": 6,
-    "Client": {
-      "Id": 11,
-      "Role": 5,
-      "FirstName": "Carmencita",
-      "LastName": "Tattam",
-      "PhoneNumber": "800838101",
-      "EmployeeId": "e8"
+    "id": 6,
+    "client": {
+      "id": 11,
+      "role": 5,
+      "firstName": "Carmencita",
+      "lastName": "Tattam",
+      "phoneNumber": "800838101",
+      "employeeId": "e8"
     },
-    "Equipment": {
-      "Id": 4,
-      "Size": 47,
-      "Purpose": "Figure Skating",
-      "IsFunctional": true,
-      "Discriminator": "InlineSkates",
-      "WheelDiameter": 15,
-      "BearingType": "ABEC-5"
+    "equipment": {
+      "id": 4,
+      "size": 47,
+      "purpose": "Figure",
+      "isFunctional": true,
+      "wheelDiameter": 15,
+      "bearingType": "ABEC-5",
+      "hourlyFee": 5,
+      "discriminator": "InlineSkates"
     },
-    "StartDate": "2023-06-02T07:55:37Z",
-    "ScheduledEndDate": "2023-06-03T07:55:37Z",
-    "EndDate": "2023-06-03T07:55:37Z",
-    "EquipmentDamaged": false
+    "startDate": "2023-06-02T07:55:37Z",
+    "scheduledEndDate": "2023-06-03T07:55:37Z",
+    "endDate": "2023-06-03T07:55:37Z",
+    "equipmentDamaged": false
   },
   {
-    "Id": 7,
-    "Client": {
-      "Id": 1,
-      "Role": 1,
-      "FirstName": "Aubrey",
-      "LastName": "Hurworth",
-      "PhoneNumber": "190684116"
+    "id": 7,
+    "client": {
+      "id": 1,
+      "role": 1,
+      "firstName": "Aubrey",
+      "lastName": "Hurworth",
+      "phoneNumber": "190684116"
     },
-    "Equipment": {
-      "Id": 12,
-      "Size": 41,
-      "Purpose": "Speed Skating",
-      "IsFunctional": true,
-      "Discriminator": "InlineSkates",
-      "WheelDiameter": 38,
-      "BearingType": "ABEC-7"
+    "equipment": {
+      "id": 12,
+      "size": 41,
+      "purpose": "Performance",
+      "isFunctional": true,
+      "wheelDiameter": 38,
+      "bearingType": "ABEC-7",
+      "hourlyFee": 2,
+      "discriminator": "InlineSkates"
     },
-    "StartDate": "2022-01-28T07:42:18Z",
-    "ScheduledEndDate": "2022-02-04T07:42:18Z",
-    "EndDate": "2022-02-04T07:42:18Z",
-    "EquipmentDamaged": true
+    "startDate": "2022-01-28T07:42:18Z",
+    "scheduledEndDate": "2022-02-04T07:42:18Z",
+    "endDate": "2022-02-04T07:42:18Z",
+    "equipmentDamaged": true
   },
   {
-    "Id": 8,
-    "Client": {
-      "Id": 2,
-      "Role": 3,
-      "FirstName": "Duncan",
-      "LastName": "Agius",
-      "PhoneNumber": "456100995",
-      "EmployeeId": "e1"
+    "id": 8,
+    "client": {
+      "id": 2,
+      "role": 3,
+      "firstName": "Duncan",
+      "lastName": "Agius",
+      "phoneNumber": "456100995",
+      "employeeId": "e1"
     },
-    "Equipment": {
-      "Id": 1,
-      "Size": 44,
-      "Purpose": "Speed Skating",
-      "IsFunctional": true,
-      "Discriminator": "RollerSkates",
-      "WheelHardness": 36
+    "equipment": {
+      "id": 1,
+      "size": 44,
+      "purpose": "Performance",
+      "isFunctional": true,
+      "wheelHardness": 36,
+      "hourlyFee": 3,
+      "discriminator": "RollerSkates"
     },
-    "StartDate": "2022-10-10T00:53:03Z",
-    "ScheduledEndDate": "2022-10-12T00:53:03Z",
-    "EndDate": "2022-10-13T00:53:03Z",
-    "EquipmentDamaged": true
+    "startDate": "2022-10-10T00:53:03Z",
+    "scheduledEndDate": "2022-10-12T00:53:03Z",
+    "endDate": "2022-10-13T00:53:03Z",
+    "equipmentDamaged": true
   },
   {
-    "Id": 9,
-    "Client": {
-      "Id": 6,
-      "Role": 1,
-      "FirstName": "Hermina",
-      "LastName": "Edgley",
-      "PhoneNumber": "882627905"
+    "id": 9,
+    "client": {
+      "id": 6,
+      "role": 1,
+      "firstName": "Hermina",
+      "lastName": "Edgley",
+      "phoneNumber": "882627905"
     },
-    "Equipment": {
-      "Id": 10,
-      "Size": 43,
-      "Purpose": "Hockey",
-      "IsFunctional": false,
-      "Discriminator": "IceSkates",
-      "BladeMaterial": "Carbon Fiber",
-      "HasToePick": true
+    "equipment": {
+      "id": 10,
+      "size": 43,
+      "purpose": "Hockey",
+      "isFunctional": false,
+      "bladeMaterial": "Carbon Fiber",
+      "hasToePick": true,
+      "hourlyFee": 5,
+      "discriminator": "IceSkates"
     },
-    "StartDate": "2022-06-10T18:53:37Z",
-    "ScheduledEndDate": "2022-06-14T18:53:37Z",
-    "EndDate": "2022-06-14T18:53:37Z",
-    "EquipmentDamaged": false
+    "startDate": "2022-06-10T18:53:37Z",
+    "scheduledEndDate": "2022-06-14T18:53:37Z",
+    "endDate": "2022-06-14T18:53:37Z",
+    "equipmentDamaged": false
   },
   {
-    "Id": 10,
-    "Client": {
-      "Id": 1,
-      "Role": 1,
-      "FirstName": "Aubrey",
-      "LastName": "Hurworth",
-      "PhoneNumber": "190684116"
+    "id": 10,
+    "client": {
+      "id": 1,
+      "role": 1,
+      "firstName": "Aubrey",
+      "lastName": "Hurworth",
+      "phoneNumber": "190684116"
     },
-    "Equipment": {
-      "Id": 9,
-      "Size": 38,
-      "Purpose": "Speed Skating",
-      "IsFunctional": true,
-      "Discriminator": "IceSkates",
-      "BladeMaterial": "Steel",
-      "HasToePick": true
+    "equipment": {
+      "id": 9,
+      "size": 38,
+      "purpose": "Performance",
+      "isFunctional": true,
+      "bladeMaterial": "Steel",
+      "hasToePick": true,
+      "hourlyFee": 2,
+      "discriminator": "IceSkates"
     },
-    "StartDate": "2022-08-10T00:07:38Z",
-    "ScheduledEndDate": "2022-08-16T00:07:38Z",
-    "EndDate": "2022-08-16T00:07:38Z",
-    "EquipmentDamaged": false
+    "startDate": "2022-08-10T00:07:38Z",
+    "scheduledEndDate": "2022-08-16T00:07:38Z",
+    "equipmentDamaged": false
   },
   {
-    "Id": 11,
-    "Client": {
-      "Id": 4,
-      "Role": 1,
-      "FirstName": "Sherilyn",
-      "LastName": "Cornewall",
-      "PhoneNumber": "198315600"
+    "id": 11,
+    "client": {
+      "id": 4,
+      "role": 1,
+      "firstName": "Sherilyn",
+      "lastName": "Cornewall",
+      "phoneNumber": "198315600"
     },
-    "Equipment": {
-      "Id": 6,
-      "Size": 47,
-      "Purpose": "Hockey",
-      "IsFunctional": true,
-      "Discriminator": "InlineSkates",
-      "WheelDiameter": 88,
-      "BearingType": "ABEC-9"
+    "equipment": {
+      "id": 6,
+      "size": 47,
+      "purpose": "Hockey",
+      "isFunctional": true,
+      "wheelDiameter": 88,
+      "bearingType": "ABEC-9",
+      "hourlyFee": 3,
+      "discriminator": "InlineSkates"
     },
-    "StartDate": "2022-01-23T21:02:29Z",
-    "ScheduledEndDate": "2022-01-23T21:02:29Z",
-    "EndDate": "2022-01-24T21:02:29Z",
-    "EquipmentDamaged": false
+    "startDate": "2022-01-23T21:02:29Z",
+    "scheduledEndDate": "2022-01-24T21:02:29Z",
+    "equipmentDamaged": false
   }
 ]

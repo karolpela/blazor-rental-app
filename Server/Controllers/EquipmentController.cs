@@ -57,53 +57,6 @@ public class EquipmentController : ControllerBase
         return sportsEquipment;
     }
 
-    // PUT: api/Equipment/5
-    // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-    // [HttpPut("{id}")]
-    // public async Task<IActionResult> PutSportsEquipment(int id, SportsEquipment sportsEquipment)
-    // {
-    //     if (id != sportsEquipment.Id)
-    //     {
-    //         return BadRequest();
-    //     }
-    //
-    //     _context.Entry(sportsEquipment).State = EntityState.Modified;
-    //
-    //     try
-    //     {
-    //         await _context.SaveChangesAsync();
-    //     }
-    //     catch (DbUpdateConcurrencyException)
-    //     {
-    //         if (!SportsEquipmentExists(id))
-    //         {
-    //             return NotFound();
-    //         }
-    //         else
-    //         {
-    //             throw;
-    //         }
-    //     }
-    //
-    //     return NoContent();
-    // }
-
-    // POST: api/Equipment
-    // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-    // [HttpPost]
-    // public async Task<ActionResult<SportsEquipment>> PostSportsEquipment(SportsEquipment sportsEquipment)
-    // {
-    //     if (_context.Equipment == null)
-    //     {
-    //         return Problem("Entity set 'RentalAppContext.Equipment'  is null.");
-    //     }
-    //
-    //     _context.Equipment.Add(sportsEquipment);
-    //     await _context.SaveChangesAsync();
-    //
-    //     return CreatedAtAction("GetSportsEquipment", new { id = sportsEquipment.Id }, sportsEquipment);
-    // }
-
     // DELETE: api/Equipment/5
     [HttpDelete("{id}")]
     public async Task<IActionResult> DeleteSportsEquipment(int id)

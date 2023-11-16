@@ -1,4 +1,3 @@
-@page "/"
 @page "/active-rentals"
 @using RentalApp.Shared.Models
 @using System.Text.RegularExpressions
@@ -6,11 +5,11 @@
 <PageTitle>Active rentals</PageTitle>
 <RadzenCard class="bg-card">
     <RadzenText Text="Active rentals" TextAlign="TextAlign.Center" TextStyle="TextStyle.H3" TagName="TagName.H1"/>
-    <RadzenDataGrid
-        TItem="Rental" Data="@rentals" class="rental-table"
-        Style="max-width: 1200px; border: 0"
-        AllowSorting="false" AllowPaging="false" AllowFiltering="false" GridLines="DataGridGridLines.Horizontal"
-        LoadData="@rentalsLoadData" Count="@rentalsCount">
+    <RadzenDataGrid @ref="dataGrid"
+                    TItem="Rental" Data="@rentals" class="rental-table"
+                    Style="max-width: 1200px; border: 0"
+                    AllowSorting="false" AllowPaging="false" AllowFiltering="false" GridLines="DataGridGridLines.Horizontal"
+                    LoadData="@RentalsLoadData" Count="@RentalsCount">
         <Columns>
             <RadzenDataGridColumn TItem="Rental" Title="Client" TextAlign="TextAlign.Center">
                 <Template Context="clientContext">
@@ -25,7 +24,8 @@
                       $"{rental.Equipment.Size}")
                 </Template>
             </RadzenDataGridColumn>
-            <RadzenDataGridColumn TItem="Rental" Property="StartDate" Title="Start Date" TextAlign="TextAlign.Center">
+            <RadzenDataGridColumn TItem="Rental" Property="StartDate" Title="Start Date" TextAlign="TextAlign.Center"
+                                  SortOrder="SortOrder.Ascending">
                 <Template Context="rental">
                     @rental.StartDate.ToString("yyyy-MM-dd HH:mm")
                 </Template>
@@ -44,11 +44,10 @@
                 </Template>
             </RadzenDataGridColumn>
             <RadzenDataGridColumn TItem="Rental" Title="Actions" Property="" TextAlign="TextAlign.Center" Width="25%">
-                <Template >
-                    <RadzenButton Text="End" ButtonStyle="ButtonStyle.Success"></RadzenButton>
-                    <RadzenButton Text="End (damaged)" ButtonStyle="ButtonStyle.Warning"></RadzenButton>
+                <Template>
+                    <RadzenButton Click="@(() => EndRental(context, false))" Text="End" ButtonStyle="ButtonStyle.Success"></RadzenButton>
+                    <RadzenButton Click="@(() => EndRental(context, true))" Text="End (damaged)" ButtonStyle="ButtonStyle.Warning"></RadzenButton>
                 </Template>
-
             </RadzenDataGridColumn>
         </Columns>
     </RadzenDataGrid>

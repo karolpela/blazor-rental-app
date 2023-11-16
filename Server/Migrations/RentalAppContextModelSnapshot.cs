@@ -15,7 +15,7 @@ namespace RentalApp.Server.Migrations
         protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
-            modelBuilder.HasAnnotation("ProductVersion", "7.0.7");
+            modelBuilder.HasAnnotation("ProductVersion", "7.0.11");
 
             modelBuilder.Entity("ProtectiveGearRental", b =>
                 {
@@ -478,7 +478,6 @@ namespace RentalApp.Server.Migrations
                         {
                             Id = 1,
                             ClientId = 4,
-                            EndDate = new DateTimeOffset(new DateTime(2022, 6, 19, 12, 12, 33, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
                             EquipmentDamaged = false,
                             EquipmentId = 11,
                             ScheduledEndDate = new DateTimeOffset(new DateTime(2022, 6, 19, 12, 12, 33, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
@@ -568,7 +567,6 @@ namespace RentalApp.Server.Migrations
                         {
                             Id = 10,
                             ClientId = 1,
-                            EndDate = new DateTimeOffset(new DateTime(2022, 8, 16, 0, 7, 38, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
                             EquipmentDamaged = false,
                             EquipmentId = 9,
                             ScheduledEndDate = new DateTimeOffset(new DateTime(2022, 8, 16, 0, 7, 38, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
@@ -578,10 +576,9 @@ namespace RentalApp.Server.Migrations
                         {
                             Id = 11,
                             ClientId = 4,
-                            EndDate = new DateTimeOffset(new DateTime(2022, 1, 24, 21, 2, 29, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
                             EquipmentDamaged = false,
                             EquipmentId = 6,
-                            ScheduledEndDate = new DateTimeOffset(new DateTime(2022, 1, 23, 21, 2, 29, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
+                            ScheduledEndDate = new DateTimeOffset(new DateTime(2022, 1, 24, 21, 2, 29, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
                             StartDate = new DateTimeOffset(new DateTime(2022, 1, 23, 21, 2, 29, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0))
                         });
                 });

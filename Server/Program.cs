@@ -1,12 +1,11 @@
+using System.Text.Json;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using RentalApp.Server.Data;
-using RentalApp.Shared.Converters;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-
 builder.Services.AddDbContext<RentalAppContext>();
 builder.Services.AddControllersWithViews();
 builder.Services.AddRazorPages();
@@ -21,7 +20,7 @@ builder.Services.AddSwaggerDocument(config =>
 
 builder.Services.Configure<JsonOptions>(options =>
 {
-    options.JsonSerializerOptions.Converters.Add(new SportsEquipmentConverter());
+    options.JsonSerializerOptions.PropertyNamingPolicy = JsonNamingPolicy.CamelCase;
 });
 
 var app = builder.Build();

@@ -7,49 +7,84 @@ namespace RentalApp.Shared.Converters;
 
 public class SportsEquipmentConverter : JsonConverter<SportsEquipment>
 {
+    private const string IdPropertyName = "Id";
+    private const string SizePropertyName = "Size";
+    private const string PurposePropertyName = "Purpose";
+    private const string IsFunctionalPropertyName = "IsFunctional";
+    private const string HourlyFeePropertyName = "HourlyFee";
+    private const string DiscriminatorPropertyName = "Discriminator";
+    private const string BladeMaterialPropertyName = "BladeMaterial";
+    private const string HasToePickPropertyName = "HasToePick";
+    private const string WheelDiameterPropertyName = "WheelDiameter";
+    private const string BearingTypePropertyName = "BearingType";
+    private const string WheelHardnessPropertyName = "WheelHardness";
+
     public override SportsEquipment? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
     {
         using var jsonDocument = JsonDocument.ParseValue(ref reader);
         var jsonObject = jsonDocument.RootElement.Clone();
-        var discriminator = jsonObject.GetProperty("Discriminator").GetString();
+
+        // Retrieve the naming policy from options
+        var namingPolicy = options.PropertyNamingPolicy;
+
+        // Map the property name to match the naming policy
+        // In case of null namingPolicy the default is PascalCase as per language standard
+        var discriminatorName = "Discriminator";
+        if (namingPolicy != null)
+            discriminatorName = namingPolicy.ConvertName(discriminatorName);
+        else if (options.PropertyNameCaseInsensitive)
+            // If case insensitive assume camelCase
+            discriminatorName = JsonNamingPolicy.CamelCase.ConvertName(discriminatorName);
+
+        var discriminator = jsonObject.GetProperty(discriminatorName).GetString();
 
         SportsEquipment? result = discriminator switch
         {
-            "IceSkates" => JsonSerializer.Deserialize<IceSkates>(jsonObject.GetRawText()),
-            "InlineSkates" => JsonSerializer.Deserialize<InlineSkates>(jsonObject.GetRawText()),
-            "RollerSkates" => JsonSerializer.Deserialize<RollerSkates>(jsonObject.GetRawText()),
+            "IceSkates" => JsonSerializer.Deserialize<IceSkates>(jsonObject.GetRawText(), options),
+            "InlineSkates" => JsonSerializer.Deserialize<InlineSkates>(jsonObject.GetRawText(), options),
+            "RollerSkates" => JsonSerializer.Deserialize<RollerSkates>(jsonObject.GetRawText(), options),
             _ => throw new ArgumentException($"Invalid discriminator value: {discriminator}")
         };
 
         return result;
     }
 
-
     public override void Write(Utf8JsonWriter writer, SportsEquipment value, JsonSerializerOptions options)
     {
         writer.WriteStartObject();
 
-        writer.WriteNumber("Id", value.Id);
-        writer.WriteNumber("Size", value.Size);
-        writer.WriteString("Purpose", value.Purpose);
-        writer.WriteBoolean("IsFunctional", value.IsFunctional);
-        writer.WriteNumber("HourlyFee", value.HourlyFee);
+        var namingPolicy = options.PropertyNamingPolicy;
+
+        writer.WriteNumber(namingPolicy?.ConvertName(IdPropertyName) ?? IdPropertyName, value.Id);
+        writer.WriteNumber(namingPolicy?.ConvertName(SizePropertyName) ?? SizePropertyName, value.Size);
+        writer.WriteString(namingPolicy?.ConvertName(PurposePropertyName) ?? PurposePropertyName, value.Purpose);
+        writer.WriteBoolean(namingPolicy?.ConvertName(IsFunctionalPropertyName) ?? IsFunctionalPropertyName,
+            value.IsFunctional);
+        writer.WriteNumber(namingPolicy?.ConvertName(HourlyFeePropertyName) ?? HourlyFeePropertyName, value.HourlyFee);
 
         switch (value)
         {
             case IceSkates iceSkates:
-                writer.WriteString("Discriminator", "IceSkates");
-                writer.WriteString("BladeMaterial", iceSkates.BladeMaterial);
-                writer.WriteBoolean("HasToePick", iceSkates.HasToePick);
+                writer.WriteString(namingPolicy?.ConvertName(DiscriminatorPropertyName) ?? DiscriminatorPropertyName,
+                    "IceSkates");
+                writer.WriteString(namingPolicy?.ConvertName(BladeMaterialPropertyName) ?? BladeMaterialPropertyName,
+                    iceSkates.BladeMaterial);
+                writer.WriteBoolean(namingPolicy?.ConvertName(HasToePickPropertyName) ?? HasToePickPropertyName,
+                    iceSkates.HasToePick);
                 break;
             case InlineSkates inlineSkates:
-                writer.WriteString("Discriminator", "InlineSkates");
-                writer.WriteNumber("WheelDiameter", inlineSkates.WheelDiameter);
-                writer.WriteString("BearingType", inlineSkates.BearingType);
+                writer.WriteString(namingPolicy?.ConvertName(DiscriminatorPropertyName) ?? DiscriminatorPropertyName,
+                    "InlineSkates");
+                writer.WriteNumber(namingPolicy?.ConvertName(WheelDiameterPropertyName) ?? WheelDiameterPropertyName,
+                    inlineSkates.WheelDiameter);
+                writer.WriteString(namingPolicy?.ConvertName(BearingTypePropertyName) ?? BearingTypePropertyName,
+                    inlineSkates.BearingType);
                 break;
             case RollerSkates rollerSkates:
-                writer.WriteString("Discriminator", "RollerSkates");
-                writer.WriteNumber("WheelHardness", rollerSkates.WheelHardness);
+                writer.WriteString(namingPolicy?.ConvertName(DiscriminatorPropertyName) ?? DiscriminatorPropertyName,
+                    "RollerSkates");
+                writer.WriteNumber(namingPolicy?.ConvertName(WheelHardnessPropertyName) ?? WheelHardnessPropertyName,
+                    rollerSkates.WheelHardness);
                 break;
             default:
                 throw new ArgumentException($"Invalid type: {value.GetType().Name}");

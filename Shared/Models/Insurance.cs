@@ -4,19 +4,26 @@ namespace RentalApp.Shared.Models;
 
 public class Insurance
 {
+    // For EF Core
+    private Insurance()
+    {
+    }
+
+    // Default constructor
+    public Insurance(Rental rental)
+    {
+        Rental = rental;
+    }
+
     public int Id { get; set; }
     public decimal Cost { get; set; }
 
-    [JsonIgnore] public Rental? Rental { get; set; }
+    [JsonIgnore] public Rental Rental { get; }
 
     public int RentalId { get; set; }
 
     public void CalculateCost()
     {
-        if (Rental?.Equipment == null || Rental?.Client == null)
-            // throw new InvalidOperationException("Cannot calculate cost: rental, equipment, or client is null.");
-            return;
-
         // Base cost according to equipment type
         var cost = Rental.Equipment.Discriminator switch
         {

@@ -21,11 +21,11 @@
                         </RadzenColumn>
                         <RadzenColumn Size="12" SizeMD="8">
                             <RadzenDropDown
-                                @bind-Value="rental.Client" TValue="Person"
-                                AllowClear="false" Placeholder="Select client" Data="@clients"
+                                @bind-Value="Client" TValue="Person"
+                                AllowClear="false" Placeholder="Select client" Data="@allClients"
                                 Style="width: 100%" TextProperty="FirstName" Name="ClientId"
                                 AllowFiltering="true" FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive"
-                                Change="@(() => { peselInSystem = !rental.Client.Pesel?.IsNullOrEmpty() ?? false; Pesel = rental.Client.Pesel; templateForm!.EditContext.Validate();})">
+                                Change="@(() => { peselInSystem = !Client?.Pesel.IsNullOrEmpty() ?? false; pesel = Client?.Pesel; templateForm!.EditContext?.Validate();})">
                                 <Template Context="clientContext">
                                     @($"{(clientContext as Person)!.FirstName} " +
                                       $"{(clientContext as Person)!.LastName} " +
@@ -41,12 +41,12 @@
                         </RadzenColumn>
                         <RadzenColumn Size="12" SizeMD="8">
                             <RadzenDropDown
-                                @bind-Value="rental.Equipment" TValue="SportsEquipment"
+                                @bind-Value="Equipment" TValue="SportsEquipment"
                                 AllowClear="false" Placeholder="Select equipment"
-                                Data="@equipment" Style="width: 100%" TextProperty="Purpose"
+                                Data="@availableEquipment" Style="width: 100%" TextProperty="Purpose"
                                 Name="EquipmentId" AllowFiltering="true"
                                 FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive"
-                                Change="@(() => templateForm!.EditContext.Validate())">
+                                Change="@(() => templateForm!.EditContext?.Validate())">
                                 <Template Context="equipmentContext">
                                     @($"{(equipmentContext as SportsEquipment)!.Purpose} " +
                                       $"{Regex.Replace((equipmentContext as SportsEquipment)!.Discriminator ?? string.Empty, "(?<=[a-z])([A-Z])", " $1")} " +
@@ -68,10 +68,10 @@
                         </RadzenColumn>
                         <RadzenColumn Size="12" SizeMD="9">
                             <RadzenDatePicker
-                                Style="width: 100%" @bind-Value="rental.StartDate" Name="StartDate"
+                                Style="width: 100%" @bind-Value="startDate" Name="StartDate"
                                 ShowTime="true" ShowSeconds="false"
                                 HourFormat="24" DateFormat="yyyy-MM-dd    HH:mm"
-                                Change="@(() => templateForm!.EditContext.Validate())"/>
+                                Change="@(() => templateForm?.EditContext?.Validate())"/>
                         </RadzenColumn>
                     </RadzenRow>
                     <RadzenRow AlignItems="AlignItems.Center">
@@ -80,10 +80,10 @@
                         </RadzenColumn>
                         <RadzenColumn Size="12" SizeMD="9">
                             <RadzenDatePicker
-                                Style="width: 100%" @bind-Value="rental.ScheduledEndDate" Name="EndDate"
+                                Style="width: 100%" @bind-Value="scheduledEndDate" Name="EndDate"
                                 ShowTime="true" ShowSeconds="false"
                                 HourFormat="24" DateFormat="yyyy-MM-dd    HH:mm"/>
-                            <RadzenCustomValidator Text="End date has to be greater than start date" Component="EndDate" Validator="@(() => rental.ScheduledEndDate > rental.StartDate)" Style="display: block"></RadzenCustomValidator>
+                            <RadzenCustomValidator Text="End date has to be greater than start date" Component="EndDate" Validator="@(() => scheduledEndDate > startDate)" Style="display: block"></RadzenCustomValidator>
                         </RadzenColumn>
                     </RadzenRow>
                 </RadzenStack>
@@ -101,7 +101,7 @@
                     <RadzenColumn Size="9" Offset="3">
                         <RadzenText
                             Text=@($"base total: PLN {TotalEquipmentCost}")
-                            Visible="@(totalHours > 0)">
+                            Visible="@(TotalHours > 0)">
                         </RadzenText>
                     </RadzenColumn>
                 </RadzenRow>
@@ -120,7 +120,7 @@
                 <RadzenCustomValidator
                     Text="Performance equipment requires insurance"
                     Component="InsuranceCheckbox"
-                    Validator="@(() => rental.Equipment?.Purpose != "Performance" || InsuranceWanted)"
+                    Validator="@(() => Equipment?.Purpose != "Performance" || InsuranceWanted)"
                     Style="display: block; position: absolute">
                 </RadzenCustomValidator>
             </RadzenColumn>
@@ -131,18 +131,18 @@
                     </RadzenColumn>
                     <RadzenColumn Size="12" SizeMD="9">
                         <RadzenTextBox
-                            Name="Pesel" @bind-Value="Pesel" MaxLength="11"
+                            Name="Pesel" @bind-Value="pesel" MaxLength="11"
                             ReadOnly="false" Disabled="@(peselInSystem)"
                             Style="width: 100%">
                         </RadzenTextBox>
                         <RadzenCustomValidator
                             Text="Insurance requires a PESEL no." Component="Pesel"
-                            Validator="@(() => !InsuranceWanted || !Pesel.IsNullOrEmpty())"
+                            Validator="@(() => !insuranceWanted || !pesel.IsNullOrEmpty())"
                             Style="display: block; position: absolute">
                         </RadzenCustomValidator>
                         <RadzenCustomValidator
                             Text="Not a valid PESEL no." Component="Pesel"
-                            Validator="@(() => Pesel == null || Regex.IsMatch(Pesel, @"^\d{11}$"))"
+                            Validator="@(() => pesel == null || Regex.IsMatch(pesel, @"^\d{11}$"))"
                             Style="display: block; position: absolute">
                         </RadzenCustomValidator>
                     </RadzenColumn>
@@ -161,7 +161,7 @@
                     <RadzenColumn Size="9" Offset="3">
                         <RadzenText
                             Text=@($"insurance total: PLN {Math.Round(TotalInsuranceCost, 2)}")
-                            Visible="@(totalHours > 0)">
+                            Visible="@(TotalHours > 0)">
                         </RadzenText>
                     </RadzenColumn>
                 </RadzenRow>
@@ -175,7 +175,7 @@
             <RadzenColumn>
                 <RadzenDropDown
                     @bind-Value="selectedGear" Multiple="true" AllowClear="true"
-                    Placeholder="Select gear" Data="@protectiveGear" Style="width: 100%;" ValueProperty="Id"
+                    Placeholder="Select gear" Data="@availableGear" Style="width: 100%;" ValueProperty="Id"
                     Separator=", " Name="ProtectiveGear">
                     <Template Context="gearContext">
                         @($"{(gearContext as ProtectiveGear)!.Type} {(gearContext as ProtectiveGear)!.Size} ({(gearContext as ProtectiveGear)!.Id})")
@@ -184,7 +184,7 @@
                 <RadzenCustomValidator
                     Text="Performance equipment requires protective gear"
                     Component="ProtectiveGear"
-                    Validator="@(() => rental.Equipment?.Purpose != "Performance" || !selectedGear.IsNullOrEmpty())"
+                    Validator="@(() => Equipment?.Purpose != "Performance" || !selectedGear.IsNullOrEmpty())"
                     Style="display: block; position: absolute">
                 </RadzenCustomValidator>
             </RadzenColumn>
@@ -200,7 +200,7 @@
                     <RadzenColumn Size="9" Offset="3">
                         <RadzenText
                             Text=@($"gear cost total: PLN {TotalGearCost}")
-                            Visible="@(totalHours > 0)">
+                            Visible="@(TotalHours > 0)">
                         </RadzenText>
                     </RadzenColumn>
                 </RadzenRow>
@@ -216,7 +216,7 @@
     <RadzenButton
         Click="AddRentalAsync" ButtonStyle="ButtonStyle.Success" ButtonType="ButtonType.Submit"
         Icon="done" Text="Create rental" Variant="Variant.Filled"
-        Disabled="@(!templateForm!.IsValid)"/>
+        Disabled="@(rental != null && !templateForm!.IsValid) "/>
 </RadzenStack>
 </RadzenStack>
 </RadzenTemplateForm>

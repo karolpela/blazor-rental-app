@@ -1,13 +1,12 @@
 using System.Net.Http.Json;
-using System.Text;
 using System.Text.Json;
 using Microsoft.AspNetCore.Components;
+using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.JSInterop;
 using NuGet.Packaging;
 using Radzen;
 using Radzen.Blazor;
-using RentalApp.Shared.Converters;
 using RentalApp.Shared.Models;
 using RentalApp.Shared.Models.Equipment;
 
@@ -22,28 +21,59 @@ public partial class NewRental
         { "Gloves", 5m }
     };
 
-    private readonly Insurance insurance = new();
+    private Person? _client;
+    private SportsEquipment? _equipment;
 
-    private readonly Rental rental = new(
-        DateTimeOffset.MinValue,
-        DateTimeOffset.MinValue,
-        null,
-        false);
+    private Person[]? allClients;
 
-    private readonly JsonSerializerOptions serializerOptions = new();
-    private bool _insuranceWanted;
-    private string? _pesel;
+    private SportsEquipment[]? availableEquipment;
 
-    private IEnumerable<Person>? clients;
+    private ProtectiveGear[]? availableGear;
 
-    private IEnumerable<SportsEquipment>? equipment;
+    private bool insuranceWanted;
+
+    private string? pesel;
+
     private bool peselInSystem;
 
-    private IEnumerable<ProtectiveGear>? protectiveGear;
+    // Data
+
+    private Rental? rental;
+
+    // There's no second selector so set seconds to 0
+
+    private DateTimeOffset scheduledEndDate =
+        DateTimeOffset.UtcNow.AddDays(1).AddSeconds(-DateTimeOffset.UtcNow.Second);
 
     private IEnumerable<int> selectedGear = Array.Empty<int>();
 
+    private DateTimeOffset startDate = DateTimeOffset.UtcNow.AddSeconds(-DateTimeOffset.UtcNow.Second);
+
     private RadzenTemplateForm<Rental>? templateForm;
+
+    // Fields used to create new rental
+    private Person? Client
+    {
+        get => _client;
+        set
+        {
+            _client = value;
+            CreateOrUpdateRental();
+        }
+    }
+
+    private SportsEquipment? Equipment
+    {
+        get => _equipment;
+        set
+        {
+            _equipment = value;
+            CreateOrUpdateRental();
+        }
+    }
+
+    [Inject] protected IOptions<JsonSerializerOptions> JsonOptions { get; set; } = default!;
+
     [Inject] protected IJSRuntime JSRuntime { get; set; } = default!;
 
     [Inject] protected NavigationManager NavigationManager { get; set; } = default!;
@@ -52,87 +82,98 @@ public partial class NewRental
 
     [Inject] protected HttpClient Http { get; set; } = default!;
 
-    private string? Pesel
-    {
-        get => _pesel;
-        set
-        {
-            _pesel = value;
-            if (rental.Client != null) rental.Client.Pesel = _pesel;
-        }
-    }
-
-    private int totalHours => (int)Math.Ceiling((rental.ScheduledEndDate - rental.StartDate).TotalHours);
-    private int totalDays => (int)Math.Ceiling((rental.ScheduledEndDate - rental.StartDate).TotalDays);
+    private int TotalHours => (int)Math.Ceiling((scheduledEndDate - startDate).TotalHours);
+    private int TotalDays => (int)Math.Ceiling((scheduledEndDate - startDate).TotalDays);
 
     private bool InsuranceWanted
     {
-        get => _insuranceWanted;
+        get => insuranceWanted;
         set
         {
-            _insuranceWanted = value;
-            rental.Insurance = _insuranceWanted
-                ? insurance
-                : null;
-            rental.Insurance?.CalculateCost();
-            templateForm?.EditContext.Validate();
+            if (rental != null)
+            {
+                if (value)
+                {
+                    rental.Insurance = new Insurance(rental);
+                    rental.Insurance.CalculateCost();
+                }
+                else
+                {
+                    rental.Insurance = null;
+                }
+            }
+
+            insuranceWanted = value;
+            templateForm?.EditContext?.Validate();
         }
     }
 
-    private decimal DailyEquipmentCost => (rental.Equipment?.HourlyFee ?? 0) * 24;
+    private decimal DailyEquipmentCost => (Equipment?.HourlyFee ?? 0) * 24;
 
-    private decimal TotalEquipmentCost => (rental.Equipment?.HourlyFee ?? 0) * totalHours;
+    private decimal TotalEquipmentCost => (Equipment?.HourlyFee ?? 0) * TotalHours;
 
-    private decimal DailyInsuranceCost => rental.Insurance?.Cost ?? 0;
+    private decimal DailyInsuranceCost => rental?.Insurance?.Cost ?? 0;
 
-    private decimal TotalInsuranceCost => DailyInsuranceCost * totalDays;
-
+    private decimal TotalInsuranceCost => DailyInsuranceCost * TotalDays;
 
     private decimal DailyGearCost
     {
         get
         {
+            var cost = 0m;
             if (!selectedGear.IsNullOrEmpty())
-                return protectiveGear?.Where(pg => selectedGear.Contains(pg.Id)).Select(pg => gearPerDay[pg.Type])
+                cost = availableGear?.Where(pg => selectedGear.Contains(pg.Id))
+                    .Select(pg => gearPerDay[pg.Type])
                     .Sum() ?? 0;
-            return 0;
+            return cost;
         }
     }
 
-    private decimal? TotalGearCost => DailyGearCost * totalDays;
+    private decimal? TotalGearCost => DailyGearCost * TotalDays;
 
     private decimal? TotalRentalCost => TotalEquipmentCost + TotalInsuranceCost + TotalGearCost;
 
     protected override async Task OnInitializedAsync()
     {
-        serializerOptions.Converters.Add(new SportsEquipmentConverter());
+        allClients = await Http.GetFromJsonAsync<Person[]>("api/People?role=client&sort=firstName");
+        availableGear = await Http.GetFromJsonAsync<ProtectiveGear[]>("api/ProtectiveGear?availableOnly=true");
+        availableEquipment = await Http.GetFromJsonAsync<SportsEquipment[]>("api/Equipment?availableOnly=true",
+            JsonOptions.Value);
+    }
 
-        var now = DateTimeOffset.Now;
-        var nowWithoutSeconds = new DateTimeOffset(now.Year, now.Month, now.Day, now.Hour, now.Minute, 0, now.Offset);
+    private void CreateOrUpdateRental()
+    {
+        // Do nothing if either client or equipment are not yet selected
+        if (Client == null || Equipment == null) return;
+        // Do nothing if client or equipment haven't changed
+        if (rental?.Client == Client && rental?.Equipment == Equipment) return;
 
-        rental.StartDate = nowWithoutSeconds;
-        rental.ScheduledEndDate = nowWithoutSeconds + TimeSpan.FromDays(1);
-
-        insurance.Rental = rental;
-
-        clients = await Http.GetFromJsonAsync<IEnumerable<Person>>("api/People?role=client&sort=firstName");
-        protectiveGear =
-            await Http.GetFromJsonAsync<IEnumerable<ProtectiveGear>>("api/ProtectiveGear?availableOnly=true");
-
-        var equipmentResponse = await Http.GetAsync("api/Equipment?availableOnly=true");
-        var equipmentJson = await equipmentResponse.Content.ReadAsStringAsync();
-        equipment = JsonSerializer.Deserialize<IEnumerable<SportsEquipment>>(equipmentJson, serializerOptions);
+        if (rental == null)
+        {
+            // Create if rental not initialized
+            rental = new Rental(Client, Equipment, startDate, scheduledEndDate, null, false);
+        }
+        else
+        {
+            // If initialized only assign properties
+            rental.Client = Client;
+            rental.Equipment = Equipment;
+        }
     }
 
     private async Task AddRentalAsync()
     {
+        if (rental == null) return;
+
         // Add objects for currently selected gear
-        var gearToAdd = protectiveGear?.Where(pg => selectedGear.Contains(pg.Id)).ToList();
+        var gearToAdd = availableGear?.Where(pg => selectedGear.Contains(pg.Id)).ToList();
         rental.ProtectiveGear.AddRange(gearToAdd);
 
-        var rentalJson = JsonSerializer.Serialize(rental, serializerOptions);
-        var httpContent = new StringContent(rentalJson, Encoding.UTF8, "application/json");
-        var response = await Http.PostAsync("api/Rentals", httpContent);
+        // Add PESEL if not in system
+        if (!peselInSystem) rental.Client.Pesel = pesel;
+
+        var response = await Http.PostAsJsonAsync("api/Rentals", rental, JsonOptions.Value);
+
         if (response.IsSuccessStatusCode)
         {
             var returnToDashboard = await DialogService.Alert("Rental created!", "Success",
@@ -142,7 +183,6 @@ public partial class NewRental
         else
         {
             var error = await response.Content.ReadFromJsonAsync<ErrorResponse>();
-
             {
                 await DialogService.Alert(error?.Message, "Error",
                     new AlertOptions { OkButtonText = "OK" });

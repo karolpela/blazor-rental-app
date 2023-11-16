@@ -1,42 +1,42 @@
 [
   {
-    "Id": 1,
-    "Size": 44,
-    "Purpose": "Performance",
-    "IsFunctional": true,
-    "WheelHardness": 36,
-    "HourlyFee": 3
+    "id": 1,
+    "size": 44,
+    "purpose": "Performance",
+    "isFunctional": true,
+    "wheelHardness": 36,
+    "hourlyFee": 3
   },
   {
-    "Id": 2,
-    "Size": 46,
-    "Purpose": "Figure",
-    "IsFunctional": false,
-    "WheelHardness": 75,
-    "HourlyFee": 2
+    "id": 2,
+    "size": 46,
+    "purpose": "Figure",
+    "isFunctional": false,
+    "wheelHardness": 75,
+    "hourlyFee": 2
   },
   {
-    "Id": 3,
-    "Size": 47,
-    "Purpose": "Figure",
-    "IsFunctional": true,
-    "WheelHardness": 10,
-    "HourlyFee": 4
+    "id": 3,
+    "size": 47,
+    "purpose": "Figure",
+    "isFunctional": true,
+    "wheelHardness": 10,
+    "hourlyFee": 4
   },
   {
-    "Id": 14,
-    "Size": 42,
-    "Purpose": "Figure",
-    "IsFunctional": false,
-    "WheelHardness": 91,
-    "HourlyFee": 5
+    "id": 14,
+    "size": 42,
+    "purpose": "Figure",
+    "isFunctional": false,
+    "wheelHardness": 91,
+    "hourlyFee": 5
   },
   {
-    "Id": 20,
-    "Size": 43,
-    "Purpose": "Hockey",
-    "IsFunctional": true,
-    "WheelHardness": 89,
-    "HourlyFee": 2
+    "id": 20,
+    "size": 43,
+    "purpose": "Hockey",
+    "isFunctional": true,
+    "wheelHardness": 89,
+    "hourlyFee": 2
   }
 ]

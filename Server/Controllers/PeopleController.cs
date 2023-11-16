@@ -200,7 +200,7 @@ namespace RentalApp.Server.Controllers
                 _context.People.Add(person);
                 await _context.SaveChangesAsync();
             }
-            catch (DbUpdateException ex)
+            catch (DbUpdateException)
             {
                 // Generic error message, in case another type of DbUpdateException occurs.
                 return BadRequest(new { message = "Could not create person. An error occurred." });

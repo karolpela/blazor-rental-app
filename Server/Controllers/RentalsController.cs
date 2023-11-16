@@ -46,38 +46,28 @@ public class RentalsController : ControllerBase
     }
 
     // PUT: api/Rentals/5
-    // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-    // [HttpPut("{id}")]
-    // public async Task<IActionResult> PutRental(int id, Rental rental)
-    // {
-    //     if (id != rental.Id)
-    //     {
-    //         return BadRequest();
-    //     }
-    //
-    //     _context.Entry(rental).State = EntityState.Modified;
-    //
-    //     try
-    //     {
-    //         await _context.SaveChangesAsync();
-    //     }
-    //     catch (DbUpdateConcurrencyException)
-    //     {
-    //         if (!RentalExists(id))
-    //         {
-    //             return NotFound();
-    //         }
-    //         else
-    //         {
-    //             throw;
-    //         }
-    //     }
-    //
-    //     return NoContent();
-    // }
+    [HttpPut("{id}")]
+    public async Task<IActionResult> PutRental(int id, Rental rental)
+    {
+        if (id != rental.Id) return BadRequest();
+
+        _context.Entry(rental).State = EntityState.Modified;
+
+        try
+        {
+            await _context.SaveChangesAsync();
+        }
+        catch (DbUpdateConcurrencyException)
+        {
+            if (!RentalExists(id))
+                return NotFound();
+            throw;
+        }
+
+        return NoContent();
+    }
 
     // POST: api/Rentals
-    // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
     [HttpPost]
     public async Task<ActionResult<Rental>> PostRental(Rental rental)
     {
