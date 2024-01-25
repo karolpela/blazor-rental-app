@@ -3,12 +3,12 @@
 @using System.Text.RegularExpressions
 
 <PageTitle>Active rentals</PageTitle>
-<RadzenCard class="bg-card">
+<RadzenCard class="bg-card" Style="max-width: 1200px">
     <RadzenText Text="Active rentals" TextAlign="TextAlign.Center" TextStyle="TextStyle.H3" TagName="TagName.H1"/>
     <RadzenDataGrid @ref="dataGrid"
                     TItem="Rental" Data="@rentals" class="rental-table"
-                    Style="max-width: 1200px; border: 0"
-                    AllowSorting="false" AllowPaging="false" AllowFiltering="false" GridLines="DataGridGridLines.Horizontal"
+                    Style="border: 0" ColumnWidth="120px"
+                    AllowSorting="false" AllowPaging="false" AllowFiltering="false" AllowColumnResize="true" GridLines="DataGridGridLines.Horizontal"
                     LoadData="@RentalsLoadData" Count="@RentalsCount">
         <Columns>
             <RadzenDataGridColumn TItem="Rental" Title="Client" TextAlign="TextAlign.Center">
@@ -35,7 +35,7 @@
                     @rental.ScheduledEndDate.ToString("yyyy-MM-dd HH:mm")
                 </Template>
             </RadzenDataGridColumn>
-            <RadzenDataGridColumn TItem="Rental" Property="Overdue" Title="Overdue" Width="7%" TextAlign="TextAlign.Center">
+            <RadzenDataGridColumn TItem="Rental" Property="Overdue" Title="Overdue" Width="50px" TextAlign="TextAlign.Center">
                 <Template Context="rental">
                     @{
                         var overdue = rental.Overdue;
@@ -43,7 +43,7 @@
                     <RadzenCheckBox @bind-Value="overdue" ReadOnly="true"></RadzenCheckBox>
                 </Template>
             </RadzenDataGridColumn>
-            <RadzenDataGridColumn TItem="Rental" Title="Actions" Property="" TextAlign="TextAlign.Center" Width="25%">
+            <RadzenDataGridColumn TItem="Rental" Title="Actions" Property="" Width="200px" TextAlign="TextAlign.Center">
                 <Template>
                     <RadzenButton Click="@(() => EndRental(context, false))" Text="End" ButtonStyle="ButtonStyle.Success"></RadzenButton>
                     <RadzenButton Click="@(() => EndRental(context, true))" Text="End (damaged)" ButtonStyle="ButtonStyle.Warning"></RadzenButton>

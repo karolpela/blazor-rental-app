@@ -13,13 +13,13 @@
 <RadzenFieldset Text="Rental">
     <RadzenStack>
         <RadzenRow>
-            <RadzenColumn>
+            <RadzenColumn Size="6" SizeMD="7">
                 <RadzenStack Gap="1.25rem">
                     <RadzenRow AlignItems="AlignItems.Center">
-                        <RadzenColumn Size="12" SizeMD="4">
+                        <RadzenColumn Size="12" SizeMD="3">
                             <RadzenLabel Text="Client" Component="ClientId"/>
                         </RadzenColumn>
-                        <RadzenColumn Size="12" SizeMD="8">
+                        <RadzenColumn Size="12" SizeMD="9">
                             <RadzenDropDown
                                 @bind-Value="Client" TValue="Person"
                                 AllowClear="false" Placeholder="Select client" Data="@allClients"
@@ -36,10 +36,10 @@
                         </RadzenColumn>
                     </RadzenRow>
                     <RadzenRow AlignItems="AlignItems.Center">
-                        <RadzenColumn Size="12" SizeMD="4">
+                        <RadzenColumn Size="12" SizeMD="3">
                             <RadzenLabel Text="Equipment" Component="EquipmentId"/>
                         </RadzenColumn>
-                        <RadzenColumn Size="12" SizeMD="8">
+                        <RadzenColumn Size="12" SizeMD="9">
                             <RadzenDropDown
                                 @bind-Value="Equipment" TValue="SportsEquipment"
                                 AllowClear="false" Placeholder="Select equipment"
@@ -60,7 +60,7 @@
                     </RadzenRow>
                 </RadzenStack>
             </RadzenColumn>
-            <RadzenColumn>
+            <RadzenColumn Size="6" SizeMD="5">
                 <RadzenStack Gap="1.25rem">
                     <RadzenRow AlignItems="AlignItems.Center">
                         <RadzenColumn Size="12" SizeMD="2" OffsetMD="1">
@@ -83,7 +83,7 @@
                                 Style="width: 100%" @bind-Value="scheduledEndDate" Name="EndDate"
                                 ShowTime="true" ShowSeconds="false"
                                 HourFormat="24" DateFormat="yyyy-MM-dd    HH:mm"/>
-                            <RadzenCustomValidator Text="End date has to be greater than start date" Component="EndDate" Validator="@(() => scheduledEndDate > startDate)" Style="display: block"></RadzenCustomValidator>
+                            <RadzenCustomValidator Text="End date should exceed start" Component="EndDate" Validator="@(() => scheduledEndDate > startDate)" Style="display: block; position: absolute"></RadzenCustomValidator>
                         </RadzenColumn>
                     </RadzenRow>
                 </RadzenStack>
@@ -211,12 +211,12 @@
 <RadzenStack
     AlignItems="AlignItems.Center" Gap="1rem">
     <RadzenText
-        Text=@($"Total cost: PLN {Math.Round(TotalRentalCost ?? 0, 2)}")
+        Text=@($"Total cost: PLN {Math.Max(Math.Round(TotalRentalCost ?? 0, 2), 0)}")
         TextStyle="TextStyle.Body1" Style="text-transform: uppercase; font-weight: bold"/>
     <RadzenButton
         Click="AddRentalAsync" ButtonStyle="ButtonStyle.Success" ButtonType="ButtonType.Submit"
         Icon="done" Text="Create rental" Variant="Variant.Filled"
-        Disabled="@(rental != null && !templateForm!.IsValid) "/>
+        Disabled=@(rental != null && !templateForm!.IsValid)/>
 </RadzenStack>
 </RadzenStack>
 </RadzenTemplateForm>

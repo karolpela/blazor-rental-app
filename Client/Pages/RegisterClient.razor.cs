@@ -10,7 +10,7 @@ namespace RentalApp.Client.Pages;
 public partial class RegisterClient
 {
     private readonly Person client = new(PersonRole.Client, string.Empty, string.Empty);
-    private string? badNumber;
+    private string badNumber = string.Empty;
 
     private RadzenTemplateForm<Person>? form;
 
@@ -35,9 +35,13 @@ public partial class RegisterClient
         {
             var error = await response.Content.ReadFromJsonAsync<ErrorResponse>();
             if (error?.Message == "PhoneNumberNotUnique")
-                badNumber = client.PhoneNumber!;
+            {
+                badNumber = client.PhoneNumber ?? string.Empty;
+                form!.EditContext?.Validate();
+                StateHasChanged();
+            }
             else
-                await DialogService.Alert(error?.Message, "Error",
+                await DialogService.Alert(error?.Message, "Undefined error",
                     new AlertOptions { OkButtonText = "OK" });
         }
     }

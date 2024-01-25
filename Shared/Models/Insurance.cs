@@ -18,7 +18,7 @@ public class Insurance
     public int Id { get; set; }
     public decimal Cost { get; set; }
 
-    [JsonIgnore] public Rental Rental { get; }
+    [JsonIgnore] public Rental Rental { get; } = null!;
 
     public int RentalId { get; set; }
 

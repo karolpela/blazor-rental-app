@@ -12,6 +12,10 @@ ul#nav-menu {
 
 .rz-card.bg-card {
     margin: auto;
+    width: 100vw;
+    @media (min-width: 768px) {
+        width: unset;
+    }
 }
 
 .card-heading {

@@ -63,6 +63,5 @@ public partial class ActiveRentals
     protected override async Task OnInitializedAsync()
     {
         rentals = await Http.GetFromJsonAsync<Rental[]>("api/Rentals?activeOnly=true", JsonOptions.Value);
-        ;
     }
 }

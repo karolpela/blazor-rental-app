@@ -7,7 +7,7 @@ public enum PersonRole
 {
     Client = 1,
     Attendant = 2,
-    Mechanic = 3,
+    Mechanic = 4,
     Owner = 8
 }
 

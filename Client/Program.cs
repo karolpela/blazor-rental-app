@@ -17,7 +17,7 @@ builder.Services.AddScoped(_ => new HttpClient { BaseAddress = new Uri(builder.H
 // therefore the options are injected and passed as a parameter on the appropriate pages.
 builder.Services.Configure<JsonSerializerOptions>(options =>
 {
-    options.Converters.Add(new SportsEquipmentConverter());
+    // options.Converters.Add(new SportsEquipmentConverter());
     // Use web defaults
     options.PropertyNamingPolicy = JsonNamingPolicy.CamelCase;
     options.PropertyNameCaseInsensitive = true;

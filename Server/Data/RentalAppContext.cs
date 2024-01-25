@@ -12,8 +12,7 @@ public class RentalAppContext : DbContext
 {
     private const string DbPath = "rental.db";
     private readonly JsonSerializerOptions _jsonSerializerOptions;
-
-
+    
     public RentalAppContext(DbContextOptions<RentalAppContext> options, IOptions<JsonOptions> jsonOptions)
         : base(options)
     {
@@ -125,21 +124,21 @@ public class RentalAppContext : DbContext
             e.HasMany(r => r.ProtectiveGear)
                 .WithMany(pg => pg.Rentals);
 
-            var rentalsData = File.ReadAllText("Data/SeedData/rental.json");
-            var rentals = JsonSerializer.Deserialize<Rental[]>(rentalsData, _jsonSerializerOptions);
-            if (rentals == null) return;
-            var entityData = rentals.Select(r => new
-            {
-                r.Id,
-                ClientId = r.Client.Id,
-                EquipmentId = r.Equipment.Id,
-                r.StartDate,
-                r.ScheduledEndDate,
-                r.EndDate,
-                r.EquipmentDamaged
-            });
-
-            e.HasData(entityData);
+        //     var rentalsData = File.ReadAllText("Data/SeedData/rental.json");
+        //     var rentals = JsonSerializer.Deserialize<Rental[]>(rentalsData, _jsonSerializerOptions);
+        //     if (rentals == null) return;
+        //     var entityData = rentals.Select(r => new
+        //     {
+        //         r.Id,
+        //         ClientId = r.Client.Id,
+        //         EquipmentId = r.Equipment.Id,
+        //         r.StartDate,
+        //         r.ScheduledEndDate,
+        //         r.EndDate,
+        //         r.EquipmentDamaged
+        //     });
+        //     
+        //     e.HasData(entityData);
         });
     }
 }

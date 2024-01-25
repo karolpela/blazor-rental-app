@@ -12,17 +12,10 @@ namespace RentalApp.Server.Controllers;
 public class EquipmentController : ControllerBase
 {
     private readonly RentalAppContext _context;
-
-    private readonly JsonSerializerOptions _serializerOptions;
-
+    
     public EquipmentController(RentalAppContext context)
     {
         _context = context;
-        _serializerOptions = new JsonSerializerOptions
-        {
-            WriteIndented = true
-        };
-        _serializerOptions.Converters.Add(new SportsEquipmentConverter());
     }
 
     // GET: api/Equipment

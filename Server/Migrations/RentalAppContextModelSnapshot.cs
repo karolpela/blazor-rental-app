@@ -29,7 +29,7 @@ namespace RentalApp.Server.Migrations
 
                     b.HasIndex("RentalsId");
 
-                    b.ToTable("ProtectiveGearRental");
+                    b.ToTable("ProtectiveGearRental", (string)null);
                 });
 
             modelBuilder.Entity("RentalApp.Shared.Models.Equipment.SportsEquipment", b =>
@@ -57,7 +57,7 @@ namespace RentalApp.Server.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Equipment");
+                    b.ToTable("Equipment", (string)null);
 
                     b.HasDiscriminator<string>("Discriminator").HasValue("SportsEquipment");
 
@@ -81,7 +81,7 @@ namespace RentalApp.Server.Migrations
                     b.HasIndex("RentalId")
                         .IsUnique();
 
-                    b.ToTable("Insurances");
+                    b.ToTable("Insurances", (string)null);
                 });
 
             modelBuilder.Entity("RentalApp.Shared.Models.Person", b =>
@@ -131,7 +131,7 @@ namespace RentalApp.Server.Migrations
 
                     b.HasIndex("SupervisorId");
 
-                    b.ToTable("People");
+                    b.ToTable("People", (string)null);
 
                     b.HasData(
                         new
@@ -256,7 +256,7 @@ namespace RentalApp.Server.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("ProtectiveGear");
+                    b.ToTable("ProtectiveGear", (string)null);
 
                     b.HasData(
                         new
@@ -471,7 +471,7 @@ namespace RentalApp.Server.Migrations
 
                     b.HasIndex("EquipmentId");
 
-                    b.ToTable("Rentals");
+                    b.ToTable("Rentals", (string)null);
 
                     b.HasData(
                         new
